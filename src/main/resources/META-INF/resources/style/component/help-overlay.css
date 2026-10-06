@@ -1,0 +1,101 @@
+/* ------ *
+ * Layout *
+ * ------ */
+
+.help-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1010;
+
+    pointer-events: none;
+}
+
+.help-overlay-dimmer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+
+    background: rgba(0, 0, 0, 0.65);
+    pointer-events: auto;
+}
+
+.help-overlay-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+
+    filter: drop-shadow(0.05vw 0.05vw 0 black);
+    pointer-events: none;
+    overflow: visible;
+}
+
+/* -------- *
+ * Elements *
+ * -------- */
+
+.help-overlay-label {
+    position: absolute;
+    z-index: 3;
+
+    color: white;
+    text-shadow: 0.05vw 0.05vw 0 black;
+    font-family: OpenTTD;
+    font-size: 1vw;
+    line-height: 1.35vw;
+
+    pointer-events: none;
+}
+
+.help-overlay-label-left {
+    text-align: right;
+}
+
+.help-overlay-label-right {
+    text-align: left;
+}
+
+.help-overlay-rotation-hint {
+    position: absolute;
+    top: calc(15vh + 15vw * (937 / 1217));
+    left: 50%;
+    width: 100%;
+    height: 1.35vw;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+
+    color: white;
+    text-shadow: 0.05vw 0.05vw 0 black;
+    font-family: OpenTTD;
+    font-size: 1vw;
+    line-height: 1.35vw;
+    text-align: center;
+    white-space: nowrap;
+
+    pointer-events: none;
+}
+
+.help-overlay-rotation-hint span {
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+}
+
+.help-overlay-line {
+    fill: none;
+    stroke: white;
+    stroke-width: 0.1vw;
+}
+
+.help-overlay-arrowhead {
+    fill: white;
+}

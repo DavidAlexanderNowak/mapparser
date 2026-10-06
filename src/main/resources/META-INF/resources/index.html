@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>OpenTTD Heightmap generator</title>
+    <link rel="icon" href="images/icon.ico">
+</head>
+<link rel="stylesheet" href="style/main.css"/>
+<script src="assets/vendor/jquery.min.js"></script>
+
+<link rel="stylesheet" href="assets/vendor/maplibre-gl.css"/>
+<script src="assets/vendor/maplibre-gl.js"></script>
+
+<script src="logic/main.js"></script>
+<script src="logic/mobileHandler.js"></script>
+<script src="logic/mapLogic.js"></script>
+<script src="logic/mapControls.js"></script>
+<script src="logic/viewportControls.js"></script>
+<script src="logic/textboxControls.js"></script>
+<script src="logic/helpOverlay.js"></script>
+<script src="logic/requestHandler.js"></script>
+
+<body class="top-level-container">
+
+<div class="mobile-browser-message">
+    <h1>Desktop browser required</h1>
+    <p>This map generator is not available on mobile browsers.</p>
+</div>
+
+<div id="text-box-left-container" class="component-text-box layout-text-box-left is-closed">
+    <img src="images/text_window_side_image_left.png">
+    <label>User manual</label>
+    <button id="text-box-left-close-button" class="element-close-button" title="Close this window"></button>
+    <button id="text-box-left-reset-button" class="element-reset-button" title="Reset this window"></button>
+    <button id="text-box-left-fold-button" class="element-fold-button" title="Fold this window up"></button>
+    <button id="text-box-left-pin-button" class="element-pin-button" title="Pin this window"></button>
+
+    <div class="component-text-box-content">
+        <section>
+            <h2>Tool controls</h2>
+
+            <section>
+                <h3>Sea level mode</h3>
+
+                <p>Determines what elevation will be considered zero in the generated heightmap, everything below that
+                    elevation is cut off.</p>
+                <dl>
+                    <dt>Absolute</dt>
+                    <dd>Enter the meters directly</dd>
+                    <dt>Relative</dt>
+                    <dd>Enter the percentile which shall be used as the cutoff elevation. Useful for maps around lakes
+                    </dd>
+                    <dt>Auto</dt>
+                    <dd>The tool will calculate the cutoff elevation on its own</dd>
+                </dl>
+            </section>
+
+            <section>
+                <h3>Town granularity levels</h3>
+
+                <p>Depending on zoom level, the finer granularities are unavailable.</p>
+                <dl>
+                    <dt>Off</dt>
+                    <dd>Only a heightmap.png file will be generated</dd>
+                    <dt>1</dt>
+                    <dd>Only large cities will be counted</dd>
+                    <dt>2</dt>
+                    <dd>Level 1 plus large towns</dd>
+                    <dt>3</dt>
+                    <dd>Level 2 plus villages and suburbs</dd>
+                </dl>
+            </section>
+        </section>
+
+        <section>
+            <h2>Usage in OpenTTD</h2>
+
+            <p>The heightmap can be loaded on its own, via "Play Heightmap".</p>
+            <p>In the scenario editor, the heightmap can be loaded (save icon menu), alongside the towns.json file,
+                under the towns menu -> "Generate towns" -> "Load from file".</p>
+        </section>
+
+    </div>
+
+    <a class="element-openttd-link" href="https://openttd.org"
+       target="_blank" title="Link to the game's page">OpenTTD.org</a>
+</div>
+
+<div id="text-box-right-container" class="component-text-box layout-text-box-right is-closed">
+    <img src="images/text_window_side_image_right.png">
+    <label>Project information</label>
+    <button id="text-box-right-close-button" class="element-close-button" title="Close this window"></button>
+    <button id="text-box-right-reset-button" class="element-reset-button" title="Reset this window"></button>
+    <button id="text-box-right-fold-button" class="element-fold-button" title="Fold this window up"></button>
+    <button id="text-box-right-pin-button" class="element-pin-button" title="Pin this window"></button>
+
+    <div class="component-text-box-content">
+        <section>
+            <h2>About this project</h2>
+
+            <p>This project is being run by me on my own, as the developer and hoster. The source code,
+                alongside more thorough documentation, can be obtained on my GitHub (once I set up the public repo).</p>
+        </section>
+
+        <section>
+            <h2>Planned features</h2>
+
+            <ul>
+                <li>Choosing a point on the map, to use its elevation as sea level cutoff point</li>
+                <li>Resizing of the viewport, to generate non-square rectangular maps</li>
+                <li>Advanced settings (e.g. normalization parameters and non-latin-alphabet town name handling)</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Personal information</h2>
+
+            <p>Since this is a personal project, I am offering this service completely free of charge (it is going
+                to be OpenSource in one of the next patches). If you feel financially able enough however, you are
+                welcome to make a donation, so I can afford to at least cover the costs associated with hosting, and if
+                those tiny costs are covered, use the rest to pay off my student loans.</p>
+            <p>I very irregularly work on other projects too, so feel free to check out my GitHub to see if any of
+                them are released yet.</p>
+        </section>
+
+    </div>
+
+    <span class="element-version-info">v${project.version}</span>
+
+    <a class="element-github-link" href="https://github.com/DavidAlexanderNowak"
+       target="_blank" title="Link to the projects public GitHub page">GitHub</a>
+    <a class="element-donate-link" href="https://paypal.me/david220403"
+       target="_blank" title="Link to my paypal">Donate</a>
+</div>
+
+<div id="viewport-container" class="component-viewport">
+    <img id="viewport-box" src="images/full_viewport_image.png">
+    <button id="viewport-button-close" class="element-button-close" title="Close the page"></button>
+    <label id="viewport-heightmap-resolution"></label>
+    <button id="viewport-button-info" class="element-button-info" title="Show additional information"></button>
+    <button id="viewport-button-reset" class="element-button-reset" title="Reset UI to default state"></button>
+    <button id="viewport-button-help" class="element-button-help" title="Show help for the viewport controls">?
+    </button>
+    <button id="viewport-button-seaLevelMode" class="element-button-seaLevelMode"
+            title="Switch between absolute and relative sea level modes">Absolute
+    </button>
+    <input id="viewport-input-seaLevel" class="element-input-seaLevel" type="number"
+           placeholder="Sea level" title="Enter sea level (m) for normalization"
+           data-help-text="Enter sea level for normalization. In absolute mode, meters. In relative mode, percentile from 0-100">
+    <button id="viewport-button-seaLevelAuto" class="element-button-seaLevelAuto"
+            title="Let the sea level cutoff point be calculated automatically">Auto
+    </button>
+    <button id="viewport-button-zoomIn" class="element-button-zoomIn" title="Zoom in by small step"></button>
+    <button id="viewport-button-zoomOut" class="element-button-zoomOut" title="Zoom out by small step"></button>
+    <button id="viewport-button-trueBearing" class="element-button-trueBearing" title="True the bearing"></button>
+    <button id="viewport-button-generate" class="element-button-generate"
+            title="Generate heightmap.png and towns.json"
+            data-help-text="Generate the map data (heightmap.png and towns.json). If town generation is turned off only heightmap. Pressing this button will start a download!">
+        Generate map
+    </button>
+    <button id="viewport-button-toggleTowns" class="element-button-toggleTowns"
+            title="Towns generation off"
+            data-help-text="Switch between town granularity levels (0: off 1: only cities 2: adds towns 3: adds villages and suburbs)">
+        <span id="viewport-town-granularity"></span></button>
+</div>
+
+<div id="map" class="layout-map-box"></div>
+
+</body>
+
+</html>

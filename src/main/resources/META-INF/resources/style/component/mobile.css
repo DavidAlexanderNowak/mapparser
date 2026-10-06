@@ -1,0 +1,22 @@
+.mobile-browser-message {
+    display: none;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    padding: 10vw;
+    text-align: center;
+}
+
+.mobile-browser-message h1 {
+    margin-top: 20vh;
+}
+
+.mobile-browser .mobile-browser-message {
+    display: block;
+}
+
+.mobile-browser .component-viewport,
+.mobile-browser .component-text-box,
+.mobile-browser .map-box {
+    display: none;
+}

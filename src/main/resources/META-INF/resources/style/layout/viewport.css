@@ -1,0 +1,97 @@
+/* ------ *
+ * Layout *
+ * ------ */
+.component-viewport .element-button-close {
+    top: calc(100% * 4 / 1217);
+    left: calc(100% * 4 / 937);
+    height: calc(100% * 45 / 1217);
+    width: calc(100% * 35 / 937);
+}
+
+.component-viewport label {
+    top: calc(100% * 12 / 1217);
+    left: calc(100% * 50 / 937);
+    width: calc(100% * 738 / 937);
+    height: calc(100% * 40 / 1217);
+}
+
+.component-viewport .element-button-info {
+    top: calc(100% * 4 / 1217);
+    left: calc(100% * 795 / 937);
+    height: calc(100% * 45 / 1217);
+    width: calc(100% * 40 / 937);
+}
+
+.component-viewport .element-button-reset {
+    top: calc(100% * 4 / 1217);
+    left: calc(100% * 842 / 937);
+    height: calc(100% * 45 / 1217);
+    width: calc(100% * 40 / 937);
+}
+
+.component-viewport .element-button-help {
+    top: calc(100% * 4 / 1217);
+    left: calc(100% * 892 / 937);
+    height: calc(100% * 45 / 1217);
+    width: calc(100% * 40 / 937);
+
+    padding-left: 0.05vw !important;
+    line-height: 1.4vw !important;
+    font-weight: bold;
+}
+
+.component-viewport .element-button-seaLevelMode {
+    top: calc(100% * 997 / 1217);
+    left: calc(100% * 4 / 937);
+    height: calc(100% * 80 / 1217);
+    width: calc(100% * 256 / 937);
+}
+
+.component-viewport .element-input-seaLevel {
+    top: calc(100% * 997 / 1217);
+    left: calc(100% * 268 / 937);
+    height: calc(100% * 80 / 1217);
+    width: calc((100% * 531 / 937) - 0.5vw);
+}
+
+.component-viewport .element-button-seaLevelAuto {
+    top: calc(100% * 997 / 1217);
+    left: calc(100% * 807 / 937);
+    height: calc(100% * 80 / 1217);
+    width: calc(100% * 126 / 937);
+}
+
+.component-viewport .element-button-zoomIn {
+    top: calc(100% * 1085 / 1217);
+    left: calc(100% * 4 / 937);
+    height: calc(100% * 80 / 1217);
+    width: calc(100% * 80 / 937);
+}
+
+.component-viewport .element-button-zoomOut {
+    top: calc(100% * 1085 / 1217);
+    left: calc(100% * 92 / 937);
+    height: calc(100% * 80 / 1217);
+    width: calc(100% * 80 / 937);
+}
+
+.component-viewport .element-button-trueBearing {
+    top: calc(100% * 1085 / 1217);
+    left: calc(100% * 180 / 937);
+    height: calc(100% * 80 / 1217);
+    width: calc(100% * 80 / 937);
+}
+
+.component-viewport .element-button-generate {
+    top: calc(100% * 1085 / 1217);
+    left: calc(100% * 268 / 937);
+    height: calc(100% * 80 / 1217);
+    width: calc(100% * 531 / 937);
+}
+
+.component-viewport .element-button-toggleTowns {
+    top: calc(100% * 1085 / 1217);
+    left: calc(100% * 807 / 937);
+    height: calc(100% * 80 / 1217);
+    width: calc(100% * 126 / 937);
+}

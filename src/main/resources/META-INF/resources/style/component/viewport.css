@@ -1,0 +1,47 @@
+/* ------ *
+ * Layout *
+ * ------ */
+.component-viewport {
+    position: fixed;
+    top: 15vh;
+    left: 37.5vw;
+    width: 25vw;
+    aspect-ratio: 937 / 1217;
+    transform: translateY(calc(100% * 35 / 1217));
+    z-index: 1000;
+
+    pointer-events: none;
+}
+
+.component-viewport img {
+    display: block;
+    height: 100%;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* -------- *
+ * Elements *
+ * -------- */
+.component-viewport label.warning {
+    color: #a00000 !important;
+}
+.component-viewport .element-processing-indicator {
+    left: calc(100% * 420 / 937);
+    width: calc(100% * 431 / 937);
+    text-align: left;
+}
+
+.component-viewport .element-button-toggleTowns span {
+    position: absolute;
+    right: 5%;
+    bottom: 3%;
+
+    color: white;
+    text-shadow: 0.05vw 0.05vw 0 black;
+}
+
+.component-viewport .element-town-granularity-disabled {
+    color: red !important;
+    font-size: 1.25vw;
+}

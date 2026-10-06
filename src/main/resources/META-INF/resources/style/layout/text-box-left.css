@@ -1,0 +1,16 @@
+/* ------ *
+ * Layout *
+ * ------ */
+.layout-text-box-left {
+    left: 7.5vw;
+}
+
+/* -------- *
+ * Elements *
+ * -------- */
+.layout-text-box-left .element-openttd-link {
+    left: calc(100% * 2 / 750);
+    width: calc(100% * 141 / 750);
+    padding-left: calc(100% * 121 /750);
+    padding-right: calc(100% * 12 /750);
+}

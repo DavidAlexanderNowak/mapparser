@@ -1,0 +1,203 @@
+.component-text-box {
+    position: absolute;
+    top: 6vh;
+    width: 20vw;
+    aspect-ratio: 0.5;
+    /* Text boxes set to have only one dimension *
+     * Only adjustment is horizontal position    */
+    z-index: 1000;
+
+    pointer-events: none;
+
+    transition: clip-path 200ms ease;
+}
+
+.component-text-box.is-closed {
+    display: none;
+}
+
+.component-text-box.is-folded {
+    clip-path: inset(0 0 calc(100% - calc(20vw / 750 * 56)) 0);
+    pointer-events: auto;
+}
+
+.component-text-box.is-folded:not(.is-pinned):not(:hover) {
+    opacity: 0;
+}
+
+.component-text-box.is-folded {
+    transition: opacity 200ms ease;
+}
+
+/* ---------- *
+ * Components *
+ * ---------- */
+.component-text-box img {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 1000;
+}
+
+.component-text-box label {
+    top: calc(100% * 12 / 1500);
+    left: calc(100% * 50 / 750);
+    width: calc(100% * 540/ 750);
+    height: calc(100% * 40 / 1500);
+    padding-left: calc(100% * 8/ 750);
+}
+
+.component-text-box-content {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.7vw;
+
+    position: absolute;
+    top: calc(100% * 70 / 1500);
+    left: calc(100% * 20 / 750);
+    width: calc(100% * 700 / 750);
+    height: calc(100% * 1310 / 1500);
+    margin-top: 0.25vw;
+    z-index: 1001;
+
+    color: black;
+    font-size: 0.75vw;
+    line-height: 1.05vw;
+    text-align: left;
+}
+
+.component-text-box-content p {
+    margin: 0;
+    text-wrap: pretty;
+}
+
+.component-text-box-content section {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5vw;
+
+    padding: 0.7vw 0.5vw 0.5vw;
+
+    border-top: 0.05vw solid #626562;
+    border-left: 0.05vw solid #626562;
+    border-right: 0.05vw solid #a8a8a8;
+    border-bottom: 0.05vw solid #a8a8a8;
+}
+
+.component-text-box-content section:not(:first-child) {
+    margin-top: 0.45vw;
+}
+
+.component-text-box-content section>h2,
+.component-text-box-content section>h3 {
+    align-self: flex-start;
+    margin: -1.15vw 0 0 0.3vw;
+    padding: 0 0.3vw;
+    background: #838583;
+
+    color: white;
+    text-shadow: 0.05vw 0.05vw 0 black;
+    font-size: inherit;
+    font-weight: normal;
+    line-height: 0.9vw;
+}
+
+/* -------- *
+ * Elements *
+ * -------- */
+.component-text-box .element-close-button,
+.component-text-box .element-fold-button,
+.component-text-box .element-reset-button,
+.component-text-box .element-pin-button {
+    top: calc(100% * 4 / 1500);
+    height: calc(100% * 45 / 1500);
+}
+
+.component-text-box .element-close-button {
+    left: calc(100% * 4 / 750);
+    width: calc(100% * 35 / 750);
+}
+
+.component-text-box .element-fold-button,
+.component-text-box .element-reset-button,
+.component-text-box .element-pin-button {
+    width: calc(100% * 40 / 750);
+}
+
+.component-text-box .element-fold-button {
+    right: calc(100% * 100 / 750);
+}
+
+.component-text-box .element-reset-button {
+    right: calc(100% * 52 / 750);
+}
+
+.component-text-box .element-pin-button {
+    right: calc(100% * 4 / 750);
+}
+
+.component-text-box a {
+    display: flex;
+    align-items: flex-end;
+    justify-content: end;
+    /* TODO check if this alignment via flex can be done in a more elegant way (text at bottom + right bound) -> ask ai */
+    position: absolute;
+    top: calc(100% * 1452 / 1500);
+    height: calc(100% * 38 / 1500);
+    padding-top: calc(100% * 5 / 1500);
+
+    background: none;
+    border: none;
+
+    font-size: 0.8vw;
+    line-height: 0.8vw;
+
+    z-index: 1001;
+
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.component-text-box a:active {
+    background: #a8a8a8;
+    border-left: 0.05vw solid #626562;
+    border-top: 0.05vw solid #626562;
+    border-right: 0.05vw solid #a8a8a8;
+    border-bottom: 0.05vw solid #a8a8a8;
+}
+
+.component-text-box .element-link-button:active {
+    background: #a8a8a8;
+    border-left: 0.05vw solid #626562;
+    border-top: 0.05vw solid #626562;
+    border-right: 0.05vw solid #a8a8a8;
+    border-bottom: 0.05vw solid #a8a8a8;
+}
+
+.component-text-box dl {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    column-gap: 0.6vw;
+    row-gap: 0.3vw;
+
+    margin: 0;
+}
+
+.component-text-box dl>dt {
+    color: white;
+    text-shadow: 0.05vw 0.05vw 0 black;
+}
+
+.component-text-box dl>dd {
+    margin: 0;
+    text-wrap: pretty;
+}
+
+.component-text-box ul {
+    margin: 0;
+    padding-left: 1vw;
+}
+
+.component-text-box ul>li {
+    text-wrap: pretty;
+}

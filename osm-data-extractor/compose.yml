@@ -1,0 +1,8 @@
+services:
+  extractor:
+    build: .
+    image: osm-extractor:latest
+    restart: "no"
+    volumes:
+      - ./data/input:/planet:ro
+      - ./data/output:/data

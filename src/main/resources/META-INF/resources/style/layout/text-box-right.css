@@ -1,0 +1,39 @@
+/* ------ *
+ * Layout *
+ * ------ */
+.layout-text-box-right {
+    position: absolute;
+    right: 7.5vw;
+}
+
+/* -------- *
+ * Elements *
+ * -------- */
+.layout-text-box-right .element-github-link {
+    right: calc(100% * 224 / 750);
+    width: calc(100% * 120 / 750);
+    padding-left: calc(100% * 40 /750);
+    padding-right: calc(100% * 2 /750);
+}
+
+.layout-text-box-right .element-donate-link {
+    right: calc(100% * 53 / 750);
+    width: calc(100% * 120 / 750);
+    padding-left: calc(100% * 29 /750);
+    padding-right: calc(100% * 15 /750);
+}
+
+.layout-text-box-right .element-version-info {
+    position: absolute;
+    top: calc(100% * 1463 / 1500);
+    left: calc(100% * 13 / 750);
+    height: calc(100% * 38 / 1500);
+    width: calc(100% * 190 / 750);
+
+    background: none;
+
+    font-size: 0.8vw;
+    line-height: 0.8vw;
+
+    z-index: 1001;
+}

@@ -1,0 +1,94 @@
+.component-text-box label,
+.component-viewport label,
+.element-box-header-label {
+    position: absolute;
+    z-index: 1001;
+
+    color: white;
+    text-shadow: 0.05vw 0.05vw 0 black;
+    text-align: center;
+
+    pointer-events: none;
+}
+
+.component-text-box button,
+.component-viewport button,
+.element-box-button {
+    position: absolute;
+    padding: 0;
+
+    color: black;
+    font-family: OpenTTD;
+    font-size: 1vw;
+    line-height: 1vw;
+
+    background: none;
+    border: none;
+
+    z-index: 1001;
+    pointer-events: auto;
+    pointer: pointer;
+}
+
+.component-text-box button.is-toggled,
+.component-text-box button:active:not(:disabled),
+.component-viewport button.is-toggled,
+.component-viewport button:active:not(:disabled),
+.element-box-button.is-toggled,
+.element-box-button:active:not(:disabled) {
+    background: #a8a8a8;
+
+    border-left: 0.05vw solid #626562;
+    border-top: 0.05vw solid #626562;
+    border-right: 0.05vw solid #a8a8a8;
+    border-bottom: 0.05vw solid #a8a8a8;
+}
+
+.component-viewport button:disabled,
+.component-viewport button.is-disabled,
+.element-box-button:disabled,
+.element-box-button.is-disabled {
+    color: #626562;
+}
+
+.component-viewport input[type="number"],
+.element-box-input {
+    appearance: none;
+
+    position: absolute;
+    padding: 0 0 0 0.5vw;
+
+    color: black;
+    font-family: OpenTTD;
+    font-size: 1vw;
+    line-height: 1vw;
+
+    background: none;
+    border: none;
+
+    z-index: 1001;
+    pointer-events: auto;
+    -moz-appearance: textfield;
+}
+
+.component-viewport input[type="number"]:focus,
+.element-box-input:focus {
+    outline: none;
+}
+
+.component-viewport input[type="number"].is-disabled,
+.element-box-input.is-disabled {
+    color: #a8a8a8 !important;
+}
+
+.component-viewport input[type="number"]::-webkit-inner-spin-button,
+.element-box-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.component-viewport input[type="number"]::-webkit-outer-spin-button,
+.element-box-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

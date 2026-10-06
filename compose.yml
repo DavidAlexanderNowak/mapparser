@@ -1,0 +1,22 @@
+name: "map-town-parser"
+services:
+
+  map-parser:
+    image: map-town-parser:0.13alpha
+    container_name: map-town-parser
+
+    ports:
+      - "8080:8080"
+
+  osm-db:
+    image: mariadb:12.3
+    container_name: osm-db
+
+    environment:
+      MARIADB_ROOT_PASSWORD: osm-root
+
+    volumes:
+      - osm-data:/var/lib/mysql
+
+volumes:
+  osm-data:
