@@ -6,6 +6,7 @@
 @import "layout/text-box-left.css";
 @import "layout/text-box-right.css";
 @import "elements.css";
+@import "thirdparty/maplibre.css";
 
 /* ----------- *
  * General CSS *
@@ -22,8 +23,8 @@ body {
     margin: 0;
 
     font-family: OpenTTD;
-    font-size: 1vw;
-    line-height: 1vw;
+    font-size: min(1vw, calc( (90vh * 37 / 1500) ));
+    line-height: min(1vw, calc( (90vh * 37 / 1500) ));
 
     overflow: hidden;
 }

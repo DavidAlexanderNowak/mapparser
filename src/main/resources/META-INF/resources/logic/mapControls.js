@@ -1,14 +1,22 @@
+import * as maplibregl from "../assets/vendor/maplibre-gl.mjs";
+import {
+    updateTownsToggleButton,
+    generateRequestInProgress
+} from "./viewportControls.js";
+import {
+    createCentreSquareFeature,
+    createSpanWidthLine,
+    formatCoordinateWidth,
+    getMinimumZoom,
+    getMaximumZoom,
+    calculateHeightMapZoom,
+    isMapZoomAllowed,
+    getMinimumAllowedZoom
+} from "./util/calculationUtil.js";
+
+export let map;
+
 const MAP_VIEW_STORAGE_KEY = "town-map-parser-view";
-
-const BASE_MINIMUM_ZOOM = 2.5;
-const BASE_MAXIMUM_ZOOM = 14;
-const ZOOM_WARNING_MARGIN = 0.2;
-const MINIMUM_HEIGHTMAP_ZOOM = 2;
-
-const REFERENCE_LAYOUT_WIDTH = 1920;
-const SELECTION_SQUARE_LAYOUT_FRACTION = 0.25;
-const REFERENCE_SQUARE_PIXEL_WIDTH = REFERENCE_LAYOUT_WIDTH
-    * SELECTION_SQUARE_LAYOUT_FRACTION * SELECTION_SQUARE_WIDTH_RATIO;
 const DATA_RESOLUTION_BY_ZOOM = new Map([
     [1, "1km"],
     [2, "1km"],
@@ -29,7 +37,7 @@ const DATA_RESOLUTION_BY_ZOOM = new Map([
     [17, "30m"]
 ]);
 
-function initializeMap() {
+export function initializeMap() {
     const initialMapView = getInitialMapView();
     removeMapHashFromUrl();
     map = new maplibregl.Map({
@@ -70,6 +78,7 @@ function initializeMap() {
     map.on("zoom", updateTownsToggleButton);
     map.on("move", updateTownsToggleButton);
     map.on("moveend", saveCurrentMapView);
+    map.on("load", saveCurrentMapView);
 }
 
 function getInitialMapView() {
@@ -131,7 +140,7 @@ function removeMapHashFromUrl() {
     window.history.replaceState(window.history.state, document.title, baseUrl);
 }
 
-function applyMapHash() {
+export function applyMapHash() {
     const mapView = getMapViewFromHash();
     if (mapView === null) {
         removeMapHashFromUrl();
@@ -148,9 +157,9 @@ function applyMapHash() {
     removeMapHashFromUrl();
 }
 
-function updateViewportStatus() {
-    const square = createCentreSquareFeature();
-    const spanWidthLine = createSpanWidthLine(square);
+export function updateViewportStatus() {
+    const square = createCentreSquareFeature(map);
+    const spanWidthLine = createSpanWidthLine(square, map);
     const maxCoordinateWidth = parseFloat(formatCoordinateWidth(spanWidthLine));
     const heightMapZoom = calculateHeightMapZoom(maxCoordinateWidth);
     const mapZoom = map.getZoom();
@@ -174,54 +183,6 @@ function updateViewportStatus() {
     if (!generateRequestInProgress) {
         generateButton.disabled = false;
     }
-}
-
-function calculateHeightMapZoom(coordinateWidth) {
-    let zoom = 15;
-
-    do {
-        zoom--;
-    } while (calculateZoomLevelCoordinateWidth(zoom) < coordinateWidth
-        && zoom > MINIMUM_HEIGHTMAP_ZOOM);
-
-    return zoom;
-}
-
-function calculateZoomLevelCoordinateWidth(zoom) {
-    return 360 / Math.pow(2, zoom);
-}
-
-function isMapZoomAllowed(mapZoom) {
-    return mapZoom >= getMinimumAllowedZoom() && mapZoom <= getMaximumAllowedZoom();
-}
-
-function getZoomOffset() {
-    const squarePixelWidth = getSquarePixelWidth();
-    if (squarePixelWidth <= 0) {
-        return 0;
-    }
-
-    return Math.log2(squarePixelWidth / REFERENCE_SQUARE_PIXEL_WIDTH);
-}
-
-function toReferenceZoom(mapZoom) {
-    return mapZoom - getZoomOffset();
-}
-
-function getMinimumZoom() {
-    return BASE_MINIMUM_ZOOM + getZoomOffset();
-}
-
-function getMaximumZoom() {
-    return BASE_MAXIMUM_ZOOM + getZoomOffset();
-}
-
-function getMinimumAllowedZoom() {
-    return getMinimumZoom() + ZOOM_WARNING_MARGIN;
-}
-
-function getMaximumAllowedZoom() {
-    return getMaximumZoom() - ZOOM_WARNING_MARGIN;
 }
 
 function applyZoomLimits() {

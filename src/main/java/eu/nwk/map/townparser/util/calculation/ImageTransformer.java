@@ -102,7 +102,7 @@ public class ImageTransformer {
                 neighbour11 * fx * fy);
     }
 
-    public static BufferedImage buildNormalizedImage(BufferedImage image, double seaLevel, boolean seaLevelPercentile) {
+    public static BufferedImage buildNormalizedImage(BufferedImage image, double seaLevel, boolean seaLevelRelativeMode) {
         List<Integer> sortedElevations = new ArrayList<>();
         int[] pixelValues = image.getRaster().getSamples(0, 0, image.getWidth(), image.getHeight(), 0,
                 new int[image.getWidth() * image.getHeight()]);
@@ -112,7 +112,7 @@ public class ImageTransformer {
         sortedElevations.sort(Integer::compareTo);
 
         int seaLevelValue = (int) Math.round(seaLevel + Constants.HEIGHTMAP_SEA_LEVEL_OFFSET);
-        if (seaLevelPercentile) {// TODO handle array index issues
+        if (seaLevelRelativeMode) {
             seaLevelValue = sortedElevations.get((int) Math.round(sortedElevations.size() * (seaLevel / 100.0)));
         }
         int seaLevelMinimum = sortedElevations.get((int) Math.round(sortedElevations.size() * (0.005 / 100.0)));
@@ -142,9 +142,8 @@ public class ImageTransformer {
                 int normalizedValue = 0;
                 if (pixelValue > seaLevelValue) {
                     normalizedValue = (int) Math.round((pixelValue - min) / (double) elevationRange * 65535);
-                    if (normalizedValue == 0) {// TODO name this something like elevationsFloor
-                        normalizedValue = 1;// TODO pass all those settings the user can set in with some config object,
-                        // so that the values dont need to be passed in via method parameters (same for sea level)
+                    if (normalizedValue == 0) {
+                        normalizedValue = 1;
                     }
                 }
                 normalizedImage.getRaster().setSample(x, y, 0, normalizedValue);

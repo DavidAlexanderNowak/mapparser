@@ -3,7 +3,7 @@
  * ------ */
 .layout-text-box-right {
     position: absolute;
-    right: 7.5vw;
+    right: calc(50vw - ( 0.85 * min(20vw, calc( 90vh * 0.5 )) + min(25vw, calc( (90vh * 1217 / 1500) * (937 / 1217) )) ));
 }
 
 /* -------- *
@@ -16,11 +16,14 @@
     padding-right: calc(100% * 2 /750);
 }
 
-.layout-text-box-right .element-donate-link {
+.layout-text-box-right .element-donate-button {
+    top: calc(100% * 1453 /1500);
     right: calc(100% * 53 / 750);
-    width: calc(100% * 120 / 750);
-    padding-left: calc(100% * 29 /750);
-    padding-right: calc(100% * 15 /750);
+    height: calc(100% * 42 /1500);
+    width: calc(100% * 166 / 750);
+    padding-left: calc(100% * 29 / 750);
+    padding-right: calc(100% * 15 / 750);
+    padding-bottom: calc(100% * 5 / 1500);
 }
 
 .layout-text-box-right .element-version-info {
@@ -32,8 +35,8 @@
 
     background: none;
 
-    font-size: 0.8vw;
-    line-height: 0.8vw;
+    font-size: min(0.8vw, calc( 0.8 * (90vh * 37 / 1500) ));
+    line-height: min(0.8vw, calc( 0.8 * (90vh * 37 / 1500) ));
 
     z-index: 1001;
 }

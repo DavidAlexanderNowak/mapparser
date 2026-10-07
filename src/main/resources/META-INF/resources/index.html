@@ -8,16 +8,8 @@
 <script src="assets/vendor/jquery.min.js"></script>
 
 <link rel="stylesheet" href="assets/vendor/maplibre-gl.css"/>
-<script src="assets/vendor/maplibre-gl.js"></script>
 
-<script src="logic/main.js"></script>
-<script src="logic/mobileHandler.js"></script>
-<script src="logic/mapLogic.js"></script>
-<script src="logic/mapControls.js"></script>
-<script src="logic/viewportControls.js"></script>
-<script src="logic/textboxControls.js"></script>
-<script src="logic/helpOverlay.js"></script>
-<script src="logic/requestHandler.js"></script>
+<script type="module" src="logic/main.js"></script>
 
 <body class="top-level-container">
 
@@ -41,8 +33,7 @@
             <section>
                 <h3>Sea level mode</h3>
 
-                <p>Determines what elevation will be considered zero in the generated heightmap, everything below that
-                    elevation is cut off.</p>
+                <p>Sets the elevation that will be zero in the heightmap, everything below is cut off.</p>
                 <dl>
                     <dt>Absolute</dt>
                     <dd>Enter the meters directly</dd>
@@ -77,6 +68,7 @@
             <p>The heightmap can be loaded on its own, via "Play Heightmap".</p>
             <p>In the scenario editor, the heightmap can be loaded (save icon menu), alongside the towns.json file,
                 under the towns menu -> "Generate towns" -> "Load from file".</p>
+            <p>Generating random industries recommended.</p>
         </section>
 
     </div>
@@ -98,7 +90,7 @@
             <h2>About this project</h2>
 
             <p>This project is being run by me on my own, as the developer and hoster. The source code,
-                alongside more thorough documentation, can be obtained on my GitHub (once I set up the public repo).</p>
+                alongside more thorough documentation, can be obtained on my GitHub.</p>
         </section>
 
         <section>
@@ -114,22 +106,36 @@
         <section>
             <h2>Personal information</h2>
 
-            <p>Since this is a personal project, I am offering this service completely free of charge (it is going
-                to be OpenSource in one of the next patches). If you feel financially able enough however, you are
-                welcome to make a donation, so I can afford to at least cover the costs associated with hosting, and if
-                those tiny costs are covered, use the rest to pay off my student loans.</p>
+            <p>Since this is a personal project, I am offering this service completely free of charge and open source.
+                If you feel financially able enough however, you are welcome to make a donation, so I can afford to at
+                least cover the costs associated with hosting, and if those tiny costs are covered, use the rest to pay
+                off my student loans.</p>
             <p>I very irregularly work on other projects too, so feel free to check out my GitHub to see if any of
                 them are released yet.</p>
+        </section>
+
+        <section>
+            <h2>Additional information</h2>
+
+            <p>The generated map will have a resolution of 1024x1024 pixels.</p>
         </section>
 
     </div>
 
     <span class="element-version-info">v${project.version}</span>
 
-    <a class="element-github-link" href="https://github.com/DavidAlexanderNowak"
+    <a class="element-github-link" href="https://github.com/DavidAlexanderNowak/mapparser"
        target="_blank" title="Link to the projects public GitHub page">GitHub</a>
-    <a class="element-donate-link" href="https://paypal.me/david220403"
-       target="_blank" title="Link to my paypal">Donate</a>
+    <button class="element-donate-button element-link-button" title="Shows donation links">Donate</button>
+
+    <div id="donate-dropdown" class="component-donate-dropdown">
+        <a class="element-paypal-link" href="https://paypal.me/david220403"
+           target="_blank" title="Link to my paypal">PayPal</a>
+        <a class="element-buymeacoffee-link" href="https://buymeacoffee.com/dvdnwk"
+           target="_blank" title="Link to buy me a coffee">Buy me a coffee</a>
+    </div>
+
+
 </div>
 
 <div id="viewport-container" class="component-viewport">

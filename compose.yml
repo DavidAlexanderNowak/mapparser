@@ -2,7 +2,7 @@ name: "map-town-parser"
 services:
 
   map-parser:
-    image: map-town-parser:0.13alpha
+    image: map-town-parser:0.16alpha
     container_name: map-town-parser
 
     ports:

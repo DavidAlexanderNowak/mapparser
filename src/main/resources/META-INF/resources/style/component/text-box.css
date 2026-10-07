@@ -1,7 +1,7 @@
 .component-text-box {
     position: absolute;
-    top: 6vh;
-    width: 20vw;
+    top: calc(50vh - min(calc(20vw / 0.5 * 0.5), calc(90vh * 0.5)));
+    width: min(20vw, calc(90vh * 0.5));
     aspect-ratio: 0.5;
     /* Text boxes set to have only one dimension *
      * Only adjustment is horizontal position    */
@@ -50,7 +50,7 @@
 .component-text-box-content {
     display: flex;
     flex-direction: column;
-    row-gap: 0.7vw;
+    row-gap: min(0.7vw, calc( 0.7 * (90vh * 37 / 1500) ));
 
     position: absolute;
     top: calc(100% * 70 / 1500);
@@ -61,8 +61,8 @@
     z-index: 1001;
 
     color: black;
-    font-size: 0.75vw;
-    line-height: 1.05vw;
+    font-size: min(0.75vw, calc( 0.75 * (90vh * 37 / 1500) ));
+    line-height: min(1vw, calc( (90vh * 37 / 1500) ));
     text-align: left;
 }
 
@@ -74,9 +74,11 @@
 .component-text-box-content section {
     display: flex;
     flex-direction: column;
-    row-gap: 0.5vw;
+    row-gap: min(0.5vw, calc( 0.5 * (90vh * 37 / 1500) ));
 
-    padding: 0.7vw 0.5vw 0.5vw;
+    padding: min(0.7vw, calc( 0.7 * (90vh * 37 / 1500) ))
+             min(0.5vw, calc( 0.5 * (90vh * 37 / 1500) ))
+             min(0.5vw, calc( 0.5 * (90vh * 37 / 1500) ));
 
     border-top: 0.05vw solid #626562;
     border-left: 0.05vw solid #626562;
@@ -85,13 +87,13 @@
 }
 
 .component-text-box-content section:not(:first-child) {
-    margin-top: 0.45vw;
+    margin-top: min(0.45vw, calc( 0.45 * (90vh * 37 / 1500) ));
 }
 
 .component-text-box-content section>h2,
 .component-text-box-content section>h3 {
     align-self: flex-start;
-    margin: -1.15vw 0 0 0.3vw;
+    margin: max(-1.15vw, calc( -1.15 * (90vh * 37 / 1500) )) 0 0 0.3vw;
     padding: 0 0.3vw;
     background: #838583;
 
@@ -99,7 +101,7 @@
     text-shadow: 0.05vw 0.05vw 0 black;
     font-size: inherit;
     font-weight: normal;
-    line-height: 0.9vw;
+    line-height: min(0.9vw, calc( 0.9 * (90vh * 37 / 1500) ));
 }
 
 /* -------- *
@@ -136,11 +138,11 @@
     right: calc(100% * 4 / 750);
 }
 
-.component-text-box a {
+.component-text-box a,
+.component-text-box .element-link-button {
     display: flex;
     align-items: flex-end;
     justify-content: end;
-    /* TODO check if this alignment via flex can be done in a more elegant way (text at bottom + right bound) -> ask ai */
     position: absolute;
     top: calc(100% * 1452 / 1500);
     height: calc(100% * 38 / 1500);
@@ -149,8 +151,8 @@
     background: none;
     border: none;
 
-    font-size: 0.8vw;
-    line-height: 0.8vw;
+    font-size: min(0.8vw, calc( 0.8 * (90vh * 37 / 1500) ));
+    line-height: min(0.8vw, calc( 0.8 * (90vh * 37 / 1500) ));
 
     z-index: 1001;
 
@@ -166,6 +168,67 @@
     border-bottom: 0.05vw solid #a8a8a8;
 }
 
+.component-text-box .component-donate-dropdown {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+
+    right: calc(100% * 53 / 750);
+    bottom: calc(100% * 55 / 1500);
+    width: calc(100% * 300 / 750);
+    padding: calc(100% * 5 / 1500);
+
+    background: #838583;
+    border-left: 0.1vw solid #a8a8a8;
+    border-top: 0.1vw solid #a8a8a8;
+    border-right: 0.1vw solid #626562;
+    border-bottom: 0.1vw solid #626562;
+
+    z-index: 1002;
+    pointer-events: auto;
+}
+
+.component-text-box .component-donate-dropdown.is-open {
+    display: flex;
+}
+
+.component-text-box .component-donate-dropdown a {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: static;
+    width: 100%;
+    height: calc(100% * 38 / 1500);
+    padding: min(0.3vw, calc( 0.3 * (90vh * 37 / 1500) ));
+    box-sizing: border-box;
+
+    background: none;
+    border: none;
+
+    font-size: min(0.75vw, calc( 0.75 * (90vh * 37 / 1500) ));
+    line-height: min(0.75vw, calc( 0.75 * (90vh * 37 / 1500) ));
+
+    border-left: 0.05vw solid #626562;
+    border-top: 0.1vw solid #626562;
+    border-right: 0.05vw solid #a8a8a8;
+    border-bottom: 0.1vw solid #a8a8a8;
+}
+
+.component-text-box .component-donate-dropdown a:active {
+    background: #a8a8a8;
+    border-left: 0.05vw solid #626562;
+    border-top: 0.05vw solid #626562;
+    border-right: 0.05vw solid #a8a8a8;
+    border-bottom: 0.05vw solid #a8a8a8;
+}
+
+.component-text-box .component-donate-dropdown a:hover {
+    border-left: 0.1vw solid #626562;
+    border-top: 0.1vw solid #626562;
+    border-right: 0.1vw solid #a8a8a8;
+    border-bottom: 0.1vw solid #a8a8a8;
+}
+
 .component-text-box .element-link-button:active {
     background: #a8a8a8;
     border-left: 0.05vw solid #626562;
@@ -177,8 +240,8 @@
 .component-text-box dl {
     display: grid;
     grid-template-columns: max-content 1fr;
-    column-gap: 0.6vw;
-    row-gap: 0.3vw;
+    column-gap: min(0.6vw, calc( 0.6 * (90vh * 37 / 1500) ));
+    row-gap: min(0.3vw, calc( 0.3 * (90vh * 37 / 1500) ));
 
     margin: 0;
 }
@@ -195,7 +258,7 @@
 
 .component-text-box ul {
     margin: 0;
-    padding-left: 1vw;
+    padding-left: min(1vw, calc( (90vh * 37 / 1500) ));
 }
 
 .component-text-box ul>li {

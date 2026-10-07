@@ -1,9 +1,9 @@
-import { map } from "./mapControls.js";
+import { map } from "./mapHandler.js";
 import {
     seaLevelRelativeMode,
     seaLevelAutoMode,
     townGranularity
-} from "./viewportControls.js";
+} from "../ui/viewportControls.js";
 import {
     getViewportCentre,
     createCentreSquareFeature,
@@ -11,10 +11,9 @@ import {
     createSpanWidthLine,
     createSpanHeightLine,
     formatCoordinateWidth,
-    formatCoordinateHeight,
-    SELECTION_SQUARE_WIDTH_RATIO
-} from "./util/calculationUtil.js";
-import { sendGenerateRequest } from "./requestHandler.js";
+    formatCoordinateHeight
+} from "../util/calculationUtil.js";
+import { sendGenerateRequest } from "../util/requestHandler.js";
 
 export function updateAndGenerateMap() {
     let viewportCentre = getViewportCentre();

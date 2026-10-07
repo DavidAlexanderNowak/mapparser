@@ -12,8 +12,6 @@ public class Constants {
     public static final int OTTD_TOWN_EDGE_DISTANCE_TILES = 15;
     public static final double OTTD_TOWN_EDGE_DISTANCE_NORMALIZED =
             OTTD_TOWN_EDGE_DISTANCE_TILES / (double) OTTD_MAP_SIZE;
-    // TODO B: Check if Map size can be changed, and will still work.
-    // '- Consider if resolution of heightmap will suffice for larger maps
 
     public static final String TOWN_JSON_FILENAME = "towns.json";
     public static final String HEIGHT_MAP_FILENAME = "heightmap.png";

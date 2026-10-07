@@ -21,7 +21,6 @@ public class HeightMapSupplier {
 
     private static Map<TileDataKey, double[][]> tileDataCache = new HashMap<>();
 
-    // TODO B future: this should be removed, in favour of both sides being able to be different length
     private static final int SIDE_LENGTH_TILE_COUNT = 5;
 
     public static ByteArrayOutputStream getRawHeightMap(Position<Double> centre, int zoom) throws IOException {

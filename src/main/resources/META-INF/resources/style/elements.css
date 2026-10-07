@@ -19,8 +19,8 @@
 
     color: black;
     font-family: OpenTTD;
-    font-size: 1vw;
-    line-height: 1vw;
+    font-size: min(1vw, calc( (90vh * 37 / 1500) ));
+    line-height: min(1vw, calc( (90vh * 37 / 1500) ));
 
     background: none;
     border: none;
@@ -60,8 +60,8 @@
 
     color: black;
     font-family: OpenTTD;
-    font-size: 1vw;
-    line-height: 1vw;
+    font-size: min(1vw, calc( (90vh * 37 / 1500) ));
+    line-height: min(1vw, calc( (90vh * 37 / 1500) ));
 
     background: none;
     border: none;

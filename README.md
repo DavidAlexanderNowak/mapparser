@@ -1,8 +1,5 @@
 # OpenTTD Heightmap Generator
 
-[Diclaimer: the readme is currently AI-generated (and checked by me afterwards), because I did not yet have time to write a good
-text myself.]
-
 This is the public repository, in which I deliberately only show the code and basic needed setup, not the full development
 git repo, since that one contains data in the project history that is not meant to be public.
 I intentionally update this public repo only on each patch of the tool, so the current live version is always open-source.
@@ -355,7 +352,7 @@ exposes at the web root. There is no transpiler, bundler, minifier or test runne
 
 | | |
 | --- | --- |
-| Map | MapLibre GL 5.24.0 |
+| Map | MapLibre GL 6.13.0 |
 | DOM helper | jQuery 4.0.0 |
 | Base map tiles | OpenStreetMap raster tiles |
 | Fonts and chrome | OpenTTD-Sans, with PNG window images |

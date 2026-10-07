@@ -16,7 +16,8 @@ const vendorDirectory = path.join(
 const assets = {
     "jquery.min.js": ["jquery", "dist/jquery.min.js"],
     "maplibre-gl.css": ["maplibre-gl", "dist/maplibre-gl.css"],
-    "maplibre-gl.js": ["maplibre-gl", "dist/maplibre-gl.js"]
+    "maplibre-gl.mjs": ["maplibre-gl", "dist/maplibre-gl.mjs"],
+    "maplibre-gl-worker.mjs": ["maplibre-gl", "dist/maplibre-gl-worker.mjs"]
 };
 
 fs.rmSync(vendorDirectory, { recursive: true, force: true });

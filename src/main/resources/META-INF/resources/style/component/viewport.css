@@ -3,9 +3,9 @@
  * ------ */
 .component-viewport {
     position: fixed;
-    top: 15vh;
-    left: 37.5vw;
-    width: 25vw;
+    top: calc(50vh - min(calc(25vw / (937 / 1217) * 0.5), calc((90vh * 1217 / 1500) * 0.5)));
+    left: calc(50vw - calc( min(25vw, calc((90vh * 1217 / 1500) * (937 / 1217))) * 0.5 ));
+    width: min(25vw, calc((90vh * 1217 / 1500) * (937 / 1217)));
     aspect-ratio: 937 / 1217;
     transform: translateY(calc(100% * 35 / 1217));
     z-index: 1000;
@@ -27,8 +27,8 @@
     color: #a00000 !important;
 }
 .component-viewport .element-processing-indicator {
-    left: calc(100% * 420 / 937);
-    width: calc(100% * 431 / 937);
+    left: calc(100% * 420 / 937) !important;
+    width: calc(100% * 431 / 937) !important;
     text-align: left;
 }
 
@@ -43,5 +43,5 @@
 
 .component-viewport .element-town-granularity-disabled {
     color: red !important;
-    font-size: 1.25vw;
+    font-size: min(1.25vw, calc( 1.25 * (90vh * 37 / 1500) ));
 }

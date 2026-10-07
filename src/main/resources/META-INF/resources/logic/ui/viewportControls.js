@@ -1,9 +1,9 @@
 import { revealTextBox, closeTextBox } from "./textboxControls.js";
-import { updateAndGenerateMap } from "./mapLogic.js";
-import { toggleHelpOverlay } from "./helpOverlay.js";
-import { map } from "./mapControls.js";
-import { updateViewportStatus } from "./mapControls.js";
-import { toReferenceZoom, getMinimumAllowedZoom, getMaximumAllowedZoom } from "./util/calculationUtil.js";
+import { updateAndGenerateMap } from "../map/mapService.js";
+import { toggleHelpOverlay } from "../util/helpOverlay.js";
+import { map } from "../map/mapHandler.js";
+import { updateViewportStatus } from "../map/mapControls.js";
+import { toReferenceZoom, getMinimumAllowedZoom, getMaximumAllowedZoom } from "../util/calculationUtil.js";
 
 export let generateRequestInProgress = false;
 export let townGranularity = 0;

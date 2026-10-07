@@ -13,18 +13,18 @@ import java.io.IOException;
 
 public class HeightMapGenerator {
 
-    public static ByteArrayOutputStream getHeightMap(Position<Double> centre, int zoom, int rotationDegrees,
-                                                     double cutoutPercentage, double seaLevel,
-                                                     boolean seaLevelPercentile) throws IOException {
+    public static ByteArrayOutputStream generateHeightMap(Position<Double> centre, int zoom, int rotationDegrees,
+                                                          double cutoutPercentage, double seaLevel,
+                                                          boolean seaLevelRelativeMode) throws IOException {
         ByteArrayOutputStream heightMap = HeightMapSupplier.getRawHeightMap(centre, zoom);
         BufferedImage image = buildTransformedImage(loadImage(heightMap), rotationDegrees, cutoutPercentage, seaLevel,
-                seaLevelPercentile);
+                seaLevelRelativeMode);
         return writeImageToStreamAndReturn(image);
     }
 
     private static BufferedImage buildTransformedImage(BufferedImage rawHeightMapImage, int rotationDegrees,
                                                        double cutoutPercentage, double seaLevel,
-                                                       boolean seaLevelPercentile) throws ImagingOpException {
+                                                       boolean seaLevelRelativeMode) throws ImagingOpException {
         BufferedImage cutOutImage;
         if (rotationDegrees != 0) {
             BufferedImage rotatedImage = ImageTransformer.buildRotatedImage(rawHeightMapImage, rotationDegrees);
@@ -32,7 +32,7 @@ public class HeightMapGenerator {
         } else {
             cutOutImage = ImageTransformer.buildCutOutImage(rawHeightMapImage, cutoutPercentage);
         }
-        return ImageTransformer.buildNormalizedImage(cutOutImage, seaLevel, seaLevelPercentile);
+        return ImageTransformer.buildNormalizedImage(cutOutImage, seaLevel, seaLevelRelativeMode);
     }
 
     private static BufferedImage loadImage(ByteArrayOutputStream fileStream) throws IOException {

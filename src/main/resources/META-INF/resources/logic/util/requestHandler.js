@@ -1,4 +1,4 @@
-import { enableGenerateButton } from './viewportControls.js';
+import { enableGenerateButton } from '../ui/viewportControls.js';
 
 export function sendGenerateRequest(requestData) {
     fetch('/download', {
