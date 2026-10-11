@@ -13,13 +13,20 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.http.HttpResponse;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 
 public class HeightMapSupplier {
 
-    private static Map<TileDataKey, double[][]> tileDataCache = new HashMap<>();
+    private static final Map<TileDataKey, double[][]> tileDataCache = new LinkedHashMap<>(
+            Constants.MAX_CACHED_TILE_DATA_ENTRIES + 1, 0.75f, false) {
+        @Override
+        protected boolean removeEldestEntry(Map.Entry<TileDataKey, double[][]> eldest) {
+            return size() > Constants.MAX_CACHED_TILE_DATA_ENTRIES;
+        }
+    };
 
     private static final int SIDE_LENGTH_TILE_COUNT = 5;
 
@@ -78,13 +85,19 @@ public class HeightMapSupplier {
 
     private static double[][] getTileData(TileDataKey tileDataKey) throws IOException,
             InterruptedException {
-        if (tileDataCache.containsKey(tileDataKey)) {
-            return tileDataCache.get(tileDataKey);
+        double[][] cachedTileData;
+        synchronized (tileDataCache) {
+            cachedTileData = tileDataCache.get(tileDataKey);
+        }
+        if (cachedTileData != null) {
+            return cachedTileData;
         }
         BufferedImage tile = getTile(tileDataKey);
         double[][] tileElevations = ElevationCalculator.extractElevations(tile);
         double[][] noiseFixedElevations = ElevationCalculator.fixNoisyPixels(tileElevations);
-        tileDataCache.put(tileDataKey, noiseFixedElevations);
+        synchronized (tileDataCache) {
+            tileDataCache.put(tileDataKey, noiseFixedElevations);
+        }
         return noiseFixedElevations;
     }
 

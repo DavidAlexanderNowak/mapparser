@@ -1,5 +1,8 @@
 # OpenTTD Heightmap Generator
 
+[Diclaimer: the readme is currently AI-generated (and checked by me afterwards), because I did not yet have time to write a good
+text myself.]
+
 This is the public repository, in which I deliberately only show the code and basic needed setup, not the full development
 git repo, since that one contains data in the project history that is not meant to be public.
 I intentionally update this public repo only on each patch of the tool, so the current live version is always open-source.

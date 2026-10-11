@@ -104,5 +104,6 @@ public class Constants {
     /* MapZen HeightMap API */
     public static final String MAPZEN_API_URL = "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/%d/%d/%d.png";
     public static final int MAPZEN_TILE_SIZE = 256;
+    public static final int MAX_CACHED_TILE_DATA_ENTRIES = 500;
 
 }

@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>eu.nwk</groupId>
     <artifactId>map.townparser</artifactId>
-    <version>0.16alpha</version>
+    <version>0.16.1alpha</version>
     <name>Town map parser</name>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
