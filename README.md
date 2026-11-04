@@ -32,7 +32,8 @@ editor can import a list of towns from a JSON file. Producing either by hand fro
 world data is tedious: you need elevation tiles, you need to stitch, crop, rotate and
 normalise them, and you need town positions expressed in the game's own coordinate space.
 
-This tool does all of that from a single button press.
+This tool does all of that through a preview-first workflow: generate a preview to
+check the framed terrain, then download the final map data when it looks right.
 
 ## How a map is made
 
@@ -53,6 +54,9 @@ This tool does all of that from a single button press.
               |                                       |
               +-------------------+-------------------+
                                   v
+                    preview image
+                          |
+                          v
                     heightmap.png   or   mapdata.zip
 ```
 
@@ -208,7 +212,29 @@ absolute cutoff, but "everything below the 5th percentile is water" works well.
   range of what you framed, so picking a realistic peak means knowing that range from
   somewhere else.
 
-## 2.5 Town generation and granularity
+## 2.5 Preview and download workflow
+
+The **Generate preview** button requests the heightmap for the current framing and
+displays it inside the selection square. Preview generation deliberately omits town
+data, so it is faster and lets you check the terrain before downloading the final
+files. Sea-level pixels in the preview are highlighted, making the shoreline easier
+to inspect.
+
+While a request is running, map interactions and sea-level controls are disabled.
+After a successful preview, the button changes to **Download** and the **Clear
+preview** button becomes available. Downloading then requests the final output,
+including `towns.json` when town generation is enabled, and restores the normal
+generation state afterwards. Clearing the preview removes the image and returns the
+button to **Generate preview** without making another backend request.
+
+**Caveats**
+
+- The preview is an inspection aid, not the final download. It does not contain
+  town data.
+- The preview uses a colour for pixels at the sea-level cutoff; the downloaded
+  heightmap remains the normal greyscale output.
+
+## 2.6 Town generation and granularity
 
 With town generation enabled, the download additionally contains a `towns.json` that
 OpenTTD's scenario editor can import, placing real settlements at their real positions
@@ -273,7 +299,7 @@ different granularity, expect every settlement to be resized.
 - `suburb` places are included at level 3, so dense cities will produce a cluster of towns
   where you might have expected one.
 
-## 2.6 Interface
+## 2.7 Interface
 
 - **Two side panels.** The left panel is a short user manual, the right holds project
   information and links. Each can be folded to its header, closed outright, pinned, or
@@ -282,7 +308,12 @@ different granularity, expect every settlement to be resized.
   show them all.
 - **Help overlay.** The `?` button dims the page and labels every control on the frame
   with a leader line. The labels are the controls' own tooltips, so they always describe
-  the current state rather than a second, separately maintained set of texts.
+  the current state rather than a second, separately maintained set of texts. Label
+  positions are defined as responsive vertical offsets from the centre of their controls:
+  negative values place a label above its control, positive values place it below, and
+  zero centres it vertically. The same offset determines whether the leader line enters
+  through the top, bottom, or facing side of the control. Small side-entry differences
+  caused by layout rounding are treated as horizontal.
 - **View persistence.** Your last map position is stored in the browser and restored on
   the next visit.
 - **Shareable positions.** A MapLibre-style `#zoom/lat/lon/bearing/pitch` fragment is read
@@ -329,15 +360,17 @@ different granularity, expect every settlement to be resized.
 | | |
 | --- | --- |
 | Language | Java 25 |
-| Framework | Quarkus 3.35.2, packaged as an uber-jar |
+| Framework | Quarkus 3.40.1.1, packaged as an uber-jar |
 | Extensions | `quarkus-rest-jackson`, `quarkus-arc`, `quarkus-smallrye-health` |
 | Database driver | `mariadb-java-client` |
 | API | a single `POST /download` |
 | Health | `/q/health/live`, `/q/health/ready` |
 
 The API takes one JSON request describing the framed area (centre, rotation, widths, sea
-level settings, town granularity) and returns either a PNG or a ZIP, with the filename in
-the `Content-Disposition` header.
+level settings, town granularity, and whether the request is a preview) and returns a
+PNG preview or a final PNG/ZIP, with the filename in the `Content-Disposition` header.
+Preview requests skip town data and apply the preview sea-level highlighting; final
+requests produce the normal downloadable output.
 
 The processing pipeline lives in plain static classes rather than CDI beans:
 
@@ -352,6 +385,8 @@ The processing pipeline lives in plain static classes rather than CDI beans:
 
 Plain, unbundled JavaScript served straight out of `META-INF/resources`, which Quarkus
 exposes at the web root. There is no transpiler, bundler, minifier or test runner.
+The interface uses reusable dialogue components for the viewport, information panels,
+and error messages; the viewport footer also exposes the Clear preview action.
 
 | | |
 | --- | --- |
@@ -365,7 +400,8 @@ copied out of `node_modules` by `npm run copy-assets`; `package.json` exists onl
 those two versions.
 
 Layout is driven almost entirely by viewport-relative units, so the whole interface scales
-with the window.
+with the window. The help overlay follows the same responsive sizing system and recalculates
+its label and leader-line geometry when the viewport or dialogue size changes.
 
 ## Elevation data (Mapzen Terrarium)
 
@@ -389,9 +425,8 @@ accuracy varies by region.
 
 **Caveats**
 
-- The tile cache is a process-wide, **unbounded** in-memory map. It never expires, so
-  memory use grows with the variety of areas requested over the lifetime of the process.
-  Moving it into the database is on the roadmap.
+- The tile cache is a process-wide in-memory map limited to **500 entries**. Older tile
+  data is evicted as new areas are requested.
 - Tiles are always fetched as a 5 x 5 block, even when rotation and cut-out mean that some
   of them cannot contribute to the result.
 - A failed tile request fails the whole generation; there is no retry.
@@ -518,9 +553,10 @@ build/copy-assets.js the only frontend build step
   map to take its elevation as the cutoff, is planned.
 - Maps are always square and always 1024 x 1024. Draggable, non-square framing is the
   largest planned feature.
-- The elevation tile cache is unbounded and lives in memory.
+- The elevation tile cache lives in memory and is limited to 500 tile entries.
 - Per-country handling of transliterated versus English town names is planned.
 - Advanced settings, exposing the normalisation parameters, are planned.
+- Higher output resolutions for the heightmap image are planned.
 - There is no automated test suite.
 
 ## Licence

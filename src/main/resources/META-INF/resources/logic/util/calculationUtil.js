@@ -1,23 +1,18 @@
-export const SELECTION_SQUARE_WIDTH_RATIO = 921 / 937;
-
 const BASE_MINIMUM_ZOOM = 2.5;
 const BASE_MAXIMUM_ZOOM = 14;
 const ZOOM_WARNING_MARGIN = 0.2;
 const MINIMUM_HEIGHTMAP_ZOOM = 2;
 
-const REFERENCE_LAYOUT_WIDTH = 1920;
-const SELECTION_SQUARE_LAYOUT_FRACTION = 0.25;
-const REFERENCE_SQUARE_PIXEL_WIDTH = REFERENCE_LAYOUT_WIDTH
-    * SELECTION_SQUARE_LAYOUT_FRACTION * SELECTION_SQUARE_WIDTH_RATIO;
+const REFERENCE_SQUARE_PIXEL_WIDTH = 472;
+const VIEWPORT_ID = "viewport-dialogue";
+const VIEWPORT_BOX_QUERY_SELECTOR = ".component-viewport-content-selector > div";
 
 export function getViewportCentre() {
-    const viewportBox = document.getElementById("viewport-box");
+    const viewportBox = document.getElementById(VIEWPORT_ID).querySelector(VIEWPORT_BOX_QUERY_SELECTOR);
     const viewportBoxRect = viewportBox.getBoundingClientRect();
-    const centreX = viewportBoxRect.left + viewportBoxRect.width / 2;
 
-    var squareHeight = viewportBox.getBoundingClientRect().height * 921 / 1217;
-    var squareTopOffset = viewportBox.getBoundingClientRect().height * 64 / 1217;
-    const centreY = (viewportBoxRect.top + squareTopOffset) + squareHeight / 2;
+    const centreX = viewportBoxRect.left + viewportBoxRect.width / 2;
+    const centreY = viewportBoxRect.top + viewportBoxRect.height / 2;
 
     return { x: centreX, y: centreY };
 }
@@ -48,8 +43,8 @@ export function createCentreSquareFeature(map) {
 }
 
 export function getSquarePixelWidth() {
-    const viewportBox = document.getElementById("viewport-box");
-    return viewportBox.getBoundingClientRect().width * SELECTION_SQUARE_WIDTH_RATIO;
+    const viewportBox = document.getElementById(VIEWPORT_ID).querySelector(VIEWPORT_BOX_QUERY_SELECTOR);
+    return viewportBox.getBoundingClientRect().width;
 }
 
 export function createSquareWidthLine(map) {

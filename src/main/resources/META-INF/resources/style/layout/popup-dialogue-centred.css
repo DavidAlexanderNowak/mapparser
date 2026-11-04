@@ -1,0 +1,20 @@
+.layout-popup-dialogue-centred {
+    top: calc(50% - 15 * var(--unit-height));
+    left: calc(50% - 10 * var(--unit-width));
+
+    width: calc(20 * var(--unit-width));
+
+    z-index: var(--z-index-popup);
+}
+
+.component-overlay-dimmer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: calc(var(--z-index-popup) - 1);
+
+    background: rgba(0, 0, 0, 0.65);
+    pointer-events: auto;
+}

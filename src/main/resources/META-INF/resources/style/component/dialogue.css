@@ -1,0 +1,274 @@
+/* ---------- *
+ * Components *
+ * ---------- */
+.component-dialogue {
+    position: absolute;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+
+    color: black;
+    font-size: calc(0.8 * var(--unit-font-size));
+    line-height: calc(1 * var(--unit-font-size));
+    text-align: left;
+
+    z-index: var(--z-index-ui);
+}
+
+/* ------ *
+ * Header *
+ * ------ */
+.component-dialogue-header {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: auto 1fr auto;
+
+    height: var(--header-height);
+
+    background: var(--accent-colour-dark);
+
+    font-size: var(--unit-font-size);
+    line-height: calc(1.3 * var(--unit-font-size));
+
+    overflow: hidden;
+
+    pointer-events: auto;
+}
+
+.component-dialogue-header > div {
+    display: grid;
+    grid-auto-flow: column;
+
+    overflow: hidden;
+}
+
+.component-dialogue-header-centre {
+    border-left: var(--border-light);
+    border-top: var(--border-light);
+    border-right: var(--border-dark);
+    border-bottom: var(--border-dark);
+}
+
+/* --------------- *
+ * Header elements *
+ * --------------- */
+
+/* -- Buttons (Small, with icons) -- */
+.component-dialogue-header div > button,
+.component-dialogue-header div > a {
+    width: calc(0.8 * var(--header-height));
+    height: auto;
+    aspect-ratio: 0.8;
+}
+
+.component-dialogue-header div > button:active,
+.component-dialogue-header div > a:active {
+    /* no divergence from shared elements definition */
+}
+
+.component-dialogue-header div > button > img,
+.component-dialogue-header div > a > img {
+    height: 65%;
+}
+
+.component-dialogue-header div > button > label,
+.component-dialogue-header div > a > label {
+    padding-top: calc(0.1 * var(--unit-font-size));
+    font-size: calc(1.1 * var(--unit-font-size));
+}
+
+/* -- Title -- */
+.component-dialogue-header div > label {
+    background: var(--background-colour);
+
+    text-align: center;
+    padding: 0 calc(0.25 * var(--unit-width));
+
+    font-family: var(--global-font-family);
+    font-size: inherit;
+    color: var(--font-colour-header);
+    text-shadow: var(--text-shadow-header);
+
+    border-top: var(--border-dark);
+    border-left: var(--border-dark);
+    border-bottom: var(--border-light);
+    border-right: var(--border-light);
+
+    overflow: hidden;
+}
+
+/* --------------- *
+ * Content section *
+ * --------------- */
+.component-dialogue-content {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ---------------- *
+ * Content elements *
+ * ---------------- */
+.component-dialogue-content p {
+    margin: 0;
+}
+
+.component-dialogue-content > p {
+    text-align: center;
+    font-size: calc(1 * var(--unit-font-size));
+    line-height: calc(1.3 * var(--unit-font-size));
+
+    background: var(--background-colour);
+
+    border-top: var(--border-light);
+    border-left: var(--border-light);
+    border-bottom: var(--border-dark);
+    border-right: var(--border-dark);
+}
+
+
+/* ------ *
+ * Footer *
+ * ------ */
+.component-dialogue-footer {
+    position: relative;
+
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: auto 1fr auto;
+
+    height: var(--footer-height);
+
+    background: var(--accent-colour-dark);
+
+    font-size: calc(0.75 * var(--unit-font-size));
+    line-height: calc(0.9 * var(--unit-font-size));
+
+    pointer-events: auto;
+}
+
+.component-dialogue-footer > div {
+    display: grid;
+    grid-auto-flow: column;
+
+    overflow: hidden;
+}
+
+/* --------------- *
+ * Footer elements *
+ * --------------- */
+
+/* -- Buttons (Large, with icons and text) -- */
+.component-dialogue-footer div > button,
+.component-dialogue-footer div > a {
+    position: relative;
+
+    height: var(--footer-height);
+    width: auto;
+}
+
+.component-dialogue-footer div > button:disabled {
+    color: var(--accent-colour-dark);
+}
+
+.component-dialogue-footer div > button:disabled > label {
+    color: var(--accent-colour-dark);
+}
+
+.component-dialogue-footer div > button:active,
+.component-dialogue-footer div > a:active {
+    /* no divergence from shared elements definition */
+}
+
+.component-dialogue-footer div > button > img,
+.component-dialogue-footer div > a > img {
+    height: 85%;
+    padding-left: calc(0.15 * var(--unit-width));
+}
+
+.component-dialogue-footer div > button > label,
+.component-dialogue-footer div > a > label {
+    align-content: center;
+
+    font-size: calc(0.75 * var(--unit-font-size));
+
+    padding-left: calc(0.15 * var(--unit-width));
+    padding-right: calc(0.15 * var(--unit-width));
+}
+
+.component-dialogue-footer div > button > label.icon-label,
+.component-dialogue-footer div > a > label.icon-label {
+    font-size: calc(0.8 * var(--unit-font-size));
+    padding-left: calc(0.1 * var(--unit-width));
+    padding-right: 0;
+}
+
+/* Empty part for spacing */
+.component-dialogue-footer-centre {
+    background: var(--background-colour);
+
+    border-left: var(--border-light);
+    border-top: var(--border-light);
+    border-right: var(--border-dark);
+    border-bottom: var(--border-dark);
+}
+
+/* -- Footer notes -- */
+.component-dialogue-footer div > span {
+    align-content: center;
+
+    background: var(--background-colour);
+
+    padding-left: calc(0.25 * var(--unit-width));
+    padding-right: calc(0.25 * var(--unit-width));
+
+    border-top: var(--border-light);
+    border-left: var(--border-light);
+    border-bottom: var(--border-dark);
+    border-right: var(--border-dark);
+}
+
+/* --------------- *
+ * Shared elements *
+ * --------------- */
+
+/* -- Buttons - Shared style elements -- */
+.component-dialogue div > button,
+.component-dialogue div > a {
+    display: inline-grid;
+    grid-auto-flow: column;
+    grid-template-rows: minmax(0, 1fr);
+
+    align-items: center;
+    justify-content: center;
+
+    background: var(--background-colour);
+
+    border-left: var(--border-light);
+    border-top: var(--border-light);
+    border-right: var(--border-dark);
+    border-bottom: var(--border-dark);
+
+    box-sizing: border-box;
+    overflow: hidden;
+    /* Overwriting browser styles */
+    padding: 0;
+}
+
+.component-dialogue div > button:active,
+.component-dialogue div > a:active {
+    background: var(--accent-colour-light);
+
+    border-left: var(--border-dark);
+    border-top: var(--border-dark);
+    border-right: var(--border-light);
+    border-bottom: var(--border-light);
+}
+
+.component-dialogue div > button > img,
+.component-dialogue div > a > img {
+}
+
+.component-dialogue div > button > label,
+.component-dialogue div > a > label {
+    color: var(--font-colour-text);
+    font-family: var(--global-font-family);
+}

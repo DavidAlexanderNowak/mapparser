@@ -2,41 +2,60 @@
  * Layout *
  * ------ */
 .layout-text-box-right {
+    top: calc(50% - 42.5 * var(--unit-height));
+    right: calc(50% - 40 * var(--unit-width));
+    width: calc(20 * var(--unit-width));
+    height: calc(85 * var(--unit-height));
+}
+
+/* ---------- *
+ * Components *
+ * ---------- */
+
+/* Donate button dropdown */
+.component-dialogue-footer > div.component-donate-dropdown {
     position: absolute;
-    right: calc(50vw - ( 0.85 * min(20vw, calc( 90vh * 0.5 )) + min(25vw, calc( (90vh * 1217 / 1500) * (937 / 1217) )) ));
+    bottom: 100%;
+    right: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: calc(0.1 * var(--unit-width));
+
+    background: var(--background-colour);
+    border-left: var(--border-light);
+    border-top: var(--border-light);
+    border-right: var(--border-dark);
+    border-bottom: var(--border-dark);
+
+    z-index: calc(var(--z-index-ui) + 1);
 }
 
-/* -------- *
- * Elements *
- * -------- */
-.layout-text-box-right .element-github-link {
-    right: calc(100% * 224 / 750);
-    width: calc(100% * 120 / 750);
-    padding-left: calc(100% * 40 /750);
-    padding-right: calc(100% * 2 /750);
-}
-
-.layout-text-box-right .element-donate-button {
-    top: calc(100% * 1453 /1500);
-    right: calc(100% * 53 / 750);
-    height: calc(100% * 42 /1500);
-    width: calc(100% * 166 / 750);
-    padding-left: calc(100% * 29 / 750);
-    padding-right: calc(100% * 15 / 750);
-    padding-bottom: calc(100% * 5 / 1500);
-}
-
-.layout-text-box-right .element-version-info {
-    position: absolute;
-    top: calc(100% * 1463 / 1500);
-    left: calc(100% * 13 / 750);
-    height: calc(100% * 38 / 1500);
-    width: calc(100% * 190 / 750);
+.component-dialogue-footer > div.component-donate-dropdown > a {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: static;
+    width: 100%;
+    padding: calc(0.2 * var(--unit-width));
+    box-sizing: border-box;
 
     background: none;
+    border: none;
 
-    font-size: min(0.8vw, calc( 0.8 * (90vh * 37 / 1500) ));
-    line-height: min(0.8vw, calc( 0.8 * (90vh * 37 / 1500) ));
+    font-size: calc(0.75 * var(--unit-font-size));
+    line-height: calc(0.75 * var(--unit-font-size));
 
-    z-index: 1001;
+    border-left: var(--border-dark);
+    border-top: var(--border-dark);
+    border-right: var(--border-light);
+    border-bottom: var(--border-light);
+}
+
+.component-dialogue-footer > div.component-donate-dropdown > a:hover {
+    border-left: var(--border-dark);
+    border-top: var(--thin-border-dark);
+    border-right: var(--border-light);
+    border-bottom: var(--thin-border-light);
 }

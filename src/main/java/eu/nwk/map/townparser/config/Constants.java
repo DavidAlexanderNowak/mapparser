@@ -2,6 +2,7 @@ package eu.nwk.map.townparser.config;
 
 import eu.nwk.map.townparser.model.TownSize;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -60,6 +61,7 @@ public class Constants {
 
     /* Normalization */
     public static final int HEIGHTMAP_SEA_LEVEL_OFFSET = 32768;
+    public static final Color PREVIEW_LOWEST_HEIGHT_COLOUR = new Color(60, 70, 80);
 
     /* Sanitization */
     public static final int NEIGHBOUR_DISTANCE = 2;

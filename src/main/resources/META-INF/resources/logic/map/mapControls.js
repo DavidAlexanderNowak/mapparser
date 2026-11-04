@@ -1,18 +1,17 @@
+import {generateRequestInProgress, updateTitle} from "/logic/ui/viewportLogic.js";
 import {
-    generateRequestInProgress
-} from "../ui/viewportControls.js";
-import {
+    calculateHeightMapZoom,
     createCentreSquareFeature,
     createSpanWidthLine,
     formatCoordinateWidth,
-    getMinimumZoom,
+    getMaximumAllowedZoom,
     getMaximumZoom,
-    calculateHeightMapZoom,
-    isMapZoomAllowed,
-    getMinimumAllowedZoom
-} from "../util/calculationUtil.js";
+    getMinimumAllowedZoom,
+    getMinimumZoom,
+    isMapZoomAllowed
+} from "/logic/util/calculationUtil.js";
 
-import { map } from "./mapHandler.js";
+import {map} from "./mapHandler.js";
 
 const DATA_RESOLUTION_BY_ZOOM = new Map([
     [1, "1km"],
@@ -34,32 +33,131 @@ const DATA_RESOLUTION_BY_ZOOM = new Map([
     [17, "30m"]
 ]);
 
+const MAP_CONTROLS_DIMMER_CLASS = "map-controls-dimmer";
+
+let mapInteractionsEnabled = true;
+
 export function updateViewportStatus() {
+    if(!map) {
+        return;
+    }
     const square = createCentreSquareFeature(map);
     const spanWidthLine = createSpanWidthLine(square, map);
     const maxCoordinateWidth = parseFloat(formatCoordinateWidth(spanWidthLine));
     const heightMapZoom = calculateHeightMapZoom(maxCoordinateWidth);
     const mapZoom = map.getZoom();
-    const resolutionElement = document.getElementById("viewport-heightmap-resolution");
     const generateButton = document.getElementById("viewport-button-generate");
 
     if (!isMapZoomAllowed(mapZoom)) {
-        resolutionElement.textContent = mapZoom <= getMinimumAllowedZoom()
+        const viewportTitle = mapZoom <= getMinimumAllowedZoom()
             ? "Too zoomed out"
             : "Too zoomed in";
-        resolutionElement.classList.add("warning");
+        updateTitle(viewportTitle, true);
         generateButton.disabled = true;
         return;
     }
 
     const sourceTileZoom = heightMapZoom + 2;
     const dataResolution = DATA_RESOLUTION_BY_ZOOM.get(sourceTileZoom);
-    resolutionElement.textContent =
-        `Data resolution ${dataResolution} x ${dataResolution}`;
-    resolutionElement.classList.remove("warning");
+    updateTitle(`Data resolution ${dataResolution} x ${dataResolution}`);
     if (!generateRequestInProgress) {
         generateButton.disabled = false;
     }
+}
+
+export function zoomIn() {
+    _moveMapToZoom(_getZoomInTarget());
+}
+
+export function zoomOut() {
+    _moveMapToZoom(_getZoomOutTarget());
+}
+
+export function disableMapInteractions() {
+    if (!map) {
+        return;
+    }
+
+    mapInteractionsEnabled = false;
+    map.stop();
+    map.dragPan.disable();
+    map.scrollZoom.disable();
+    map.boxZoom.disable();
+    map.dragRotate.disable();
+    map.keyboard.disable();
+    map.doubleClickZoom.disable();
+    map.touchZoomRotate.disable();
+    map.touchPitch.disable();
+}
+
+export function showMapControlsDimmer() {
+    if (!map) {
+        return;
+    }
+
+    if (document.body.querySelector("." + MAP_CONTROLS_DIMMER_CLASS)) {
+        return;
+    }
+
+    const dimmer = document.createElement("div");
+    dimmer.classList.add("component-overlay-dimmer", MAP_CONTROLS_DIMMER_CLASS);
+    document.body.appendChild(dimmer);
+}
+
+export function enableMapInteractions() {
+    if (!map) {
+        return;
+    }
+
+    mapInteractionsEnabled = true;
+    map.dragPan.enable();
+    map.scrollZoom.enable();
+    map.boxZoom.enable();
+    map.dragRotate.enable();
+    map.keyboard.enable();
+    map.doubleClickZoom.enable();
+    map.touchZoomRotate.enable();
+    map.touchPitch.enable();
+    _removeMapControlsDimmer();
+}
+
+function _removeMapControlsDimmer() {
+    const dimmer = document.body.querySelector("." + MAP_CONTROLS_DIMMER_CLASS);
+    if (dimmer) {
+        dimmer.remove();
+    }
+}
+
+function _moveMapToZoom(zoom) {
+    if (!mapInteractionsEnabled) {
+        return;
+    }
+
+    map.easeTo({zoom: zoom, duration: 200, essential: true});
+}
+
+function _getZoomInTarget() {
+    const currentZoom = map.getZoom();
+    const minimumAllowedZoom = getMinimumAllowedZoom();
+    return currentZoom < minimumAllowedZoom
+        ? minimumAllowedZoom
+        : currentZoom + 0.1;
+}
+
+function _getZoomOutTarget() {
+    const currentZoom = map.getZoom();
+    const maximumAllowedZoom = getMaximumAllowedZoom();
+    return currentZoom > maximumAllowedZoom
+        ? maximumAllowedZoom
+        : currentZoom - 0.1;
+}
+
+export function trueBearing() {
+    if (!mapInteractionsEnabled) {
+        return;
+    }
+
+    map.easeTo({bearing: 0, duration: 1000, essential: true});
 }
 
 export function applyZoomLimits() {

@@ -1,16 +1,6 @@
-/* ------ *
- * Layout *
- * ------ */
 .layout-text-box-left {
-    left: calc(50vw - ( 0.85 * min(20vw, calc( 90vh * 0.5 )) + min(25vw, calc( (90vh * 1217 / 1500) * (937 / 1217) )) ));
-}
-
-/* -------- *
- * Elements *
- * -------- */
-.layout-text-box-left .element-openttd-link {
-    left: calc(100% * 2 / 750);
-    width: calc(100% * 141 / 750);
-    padding-left: calc(100% * 121 /750);
-    padding-right: calc(100% * 12 /750);
+    top: calc(50% - 42.5 * var(--unit-height));
+    left: calc(50% - 40 * var(--unit-width));
+    width: calc(20 * var(--unit-width));
+    height: calc(85 * var(--unit-height));
 }

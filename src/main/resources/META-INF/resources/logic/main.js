@@ -1,27 +1,33 @@
-import { isMobileBrowser, showMobileBrowserMessage } from "./util/mobileHandler.js";
-import { initializeMap, applyMapHash } from "./map/mapHandler.js";
-import { initializeViewportControls } from "./ui/viewportControls.js";
-import { initializeTextBoxControls } from "./ui/textboxControls.js";
-import { initializeHelpOverlay } from "./util/helpOverlay.js";
+import { isMobileBrowser, showMobileBrowserMessage } from "/logic/util/mobileHandler.js";
+import { initializeMap, applyMapHash } from "/logic/map/mapHandler.js";
+import { displayViewport, initializeViewport } from "/logic/ui/viewport.js";
+import { initializeHelpOverlay } from "/logic/util/helpOverlay.js";
 
 $(document).ready(function () {
-    initialize();
+    _initialize();
 });
 
-function initialize() {
+async function _initialize() {
     if (isMobileBrowser()) {
         showMobileBrowserMessage();
         return;
     }
 
-    initializeMap();
     window.addEventListener("hashchange", applyMapHash);
 
-    initializeControls();
+    await displayViewport();
+
+    initializeMap();
+    initializeViewport();
     initializeHelpOverlay();
+
+    _initializeDragPrevention();
 }
 
-function initializeControls() {
-    initializeViewportControls();
-    document.querySelectorAll(".component-text-box").forEach(initializeTextBoxControls);
+function _initializeDragPrevention() {
+    document.addEventListener("dragstart", (event) => {
+        if (event.target instanceof HTMLImageElement || event.target instanceof HTMLAnchorElement) {
+            event.preventDefault();
+        }
+    });
 }

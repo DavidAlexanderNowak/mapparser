@@ -15,10 +15,13 @@ public class HeightMapGenerator {
 
     public static ByteArrayOutputStream generateHeightMap(Position<Double> centre, int zoom, int rotationDegrees,
                                                           double cutoutPercentage, double seaLevel,
-                                                          boolean seaLevelRelativeMode) throws IOException {
+                                                          boolean seaLevelRelativeMode, boolean preview) throws IOException {
         ByteArrayOutputStream heightMap = HeightMapSupplier.getRawHeightMap(centre, zoom);
         BufferedImage image = buildTransformedImage(loadImage(heightMap), rotationDegrees, cutoutPercentage, seaLevel,
                 seaLevelRelativeMode);
+        if (preview) {
+            image = ImageTransformer.buildPreviewImage(image);
+        }
         return writeImageToStreamAndReturn(image);
     }
 

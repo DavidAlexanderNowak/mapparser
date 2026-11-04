@@ -8,7 +8,7 @@
     left: 0;
     height: 100%;
     width: 100%;
-    z-index: 1010;
+    z-index: var(--z-index-help-overlay);
 
     pointer-events: none;
 }
@@ -21,7 +21,7 @@
     width: 100%;
     z-index: 1;
 
-    background: rgba(0, 0, 0, 0.65);
+    background: rgba(0, 0, 0, 0.75);
     pointer-events: auto;
 }
 
@@ -33,7 +33,6 @@
     width: 100%;
     z-index: 2;
 
-    filter: drop-shadow(0.05vw 0.05vw 0 black);
     pointer-events: none;
     overflow: visible;
 }
@@ -47,10 +46,10 @@
     z-index: 3;
 
     color: white;
-    text-shadow: 0.05vw 0.05vw 0 black;
-    font-family: OpenTTD;
-    font-size: min(1vw, calc( (90vh * 30 / 1500) ));
-    line-height: min(1.35vw, calc( 1.35 * (90vh * 30 / 1500) ));
+    text-shadow: var(--text-shadow-header);
+    font-family: var(--global-font-family);
+    font-size: calc(0.8 * var(--unit-font-size));
+    line-height: calc(1.35 * var(--unit-font-size));
 
     pointer-events: none;
 }
@@ -65,18 +64,18 @@
 
 .help-overlay-rotation-hint {
     position: absolute;
-    top: calc(50vh - min(calc(25vw / (937 / 1217) * 0.3), calc((90vh * 1217 / 1500) * 0.3)));
+    top: calc(50vh - calc(10 * var(--unit-height)));
     left: 50%;
     width: 100%;
-    height: min(1.35vw, calc( 1.35 * (90vh * 30 1500) ));
+    height: calc(5 * var(--unit-height));
     transform: translate(-50%, -50%);
     z-index: 3;
 
     color: white;
-    text-shadow: 0.05vw 0.05vw 0 black;
-    font-family: OpenTTD;
-    font-size: min(1vw, calc( (90vh * 30 / 1500) ));
-    line-height: min(1.35vw, calc( 1.35 * (90vh * 30 / 1500) ));
+    text-shadow: var(--text-shadow-header);
+    font-family: var(--global-font-family);
+    font-size: calc(1 * var(--unit-font-size));
+    line-height: calc(1.35 * var(--unit-font-size));
     text-align: center;
     white-space: nowrap;
 
@@ -93,7 +92,8 @@
 .help-overlay-line {
     fill: none;
     stroke: white;
-    stroke-width: 0.1vw;
+    stroke-width: calc(0.1 * var(--unit-width));
+    filter: drop-shadow(calc(0.05 * var(--unit-width)) calc(0.05 * var(--unit-height)) 0 black);
 }
 
 .help-overlay-arrowhead {

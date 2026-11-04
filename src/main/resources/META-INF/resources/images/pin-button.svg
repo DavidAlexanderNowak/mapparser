@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:graphite="https://graphite.art" viewBox="0 0 16 16" width="16" height="16"><defs><clipPath id="artboard-4665950398294042204"><rect x="0" y="0" width="16" height="16" /></clipPath></defs><g>
+<rect fill="#ffffff" fill-opacity="0" x="0" y="0" width="16" height="16"/>
+<g clip-path="url(#artboard-4665950398294042204)">
+	<g>
+		<path d="M10.87867965644036,0.0000000000000026645352591003757 L16.050252531694145,5.171572875253783 L11.221825406947927,10.000000000000004 L6.050252531694142,4.8284271247462245 L10.87867965644036,0.0000000000000026645352591003757 Z" transform="matrix(1,0,0,1,0,0)" fill="#000000" stroke-linejoin="round" stroke-miterlimit="0" stroke="#000000"/>
+	</g>
+	<g>
+		<path d="M10.999999999999996,4.999999999999995 L11.000000000000004,14.499999999999996 L1.4999999999999991,5.000000000000002 L10.999999999999996,4.999999999999995 Z" transform="matrix(1,0,0,1,0,0)" fill="#000000" stroke-width="2" stroke-linejoin="round" stroke-miterlimit="0" stroke="#000000"/>
+	</g>
+	<g>
+		<path d="M0,15.999999999999996 L5,11" fill="none" stroke-width="3" stroke-miterlimit="0" stroke="#000000"/>
+	</g>
+</g></g></svg>

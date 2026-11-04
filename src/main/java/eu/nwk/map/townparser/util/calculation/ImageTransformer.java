@@ -152,4 +152,26 @@ public class ImageTransformer {
         return normalizedImage;
     }
 
+    public static BufferedImage buildPreviewImage(BufferedImage normalizedImage) {
+        BufferedImage previewImage = new BufferedImage(normalizedImage.getWidth(), normalizedImage.getHeight(),
+                BufferedImage.TYPE_INT_RGB);
+        Raster normalizedRaster = normalizedImage.getRaster();
+
+        for (int x = 0; x < normalizedImage.getWidth(); x++) {
+            for (int y = 0; y < normalizedImage.getHeight(); y++) {
+                int height = normalizedRaster.getSample(x, y, 0);
+                int colour = height == 0
+                        ? Constants.PREVIEW_LOWEST_HEIGHT_COLOUR.getRGB()
+                        : buildPreviewGreyscaleColour(height);
+                previewImage.setRGB(x, y, colour);
+            }
+        }
+        return previewImage;
+    }
+
+    private static int buildPreviewGreyscaleColour(int height) {
+        int greyscaleValue = (int) Math.round(height / 65535.0 * 255);
+        return (greyscaleValue << 16) | (greyscaleValue << 8) | greyscaleValue;
+    }
+
 }

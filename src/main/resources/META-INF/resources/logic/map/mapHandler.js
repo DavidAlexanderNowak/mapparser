@@ -1,11 +1,11 @@
-import * as maplibregl from "../../assets/vendor/maplibre-gl.mjs";
+import * as maplibregl from "/assets/vendor/maplibre-gl.mjs";
 import {
     updateTownsToggleButton
-} from "../ui/viewportControls.js";
+} from "/logic/ui/viewportControls.js";
 import {
     getMinimumZoom,
     getMaximumZoom,
-} from "../util/calculationUtil.js";
+} from "/logic/util/calculationUtil.js";
 import {
     updateViewportStatus,
     applyZoomLimits
@@ -15,6 +15,7 @@ export let map;
 
 const PRIMARY_STYLE = "https://tiles.stadiamaps.com/styles/stamen_terrain.json";
 const FALLBACK_STYLE = "https://tiles.openfreemap.org/styles/liberty";
+const OSM_SEA_LEVEL_COLOUR = "#4f7896";
 const FATAL_STATUS = new Set([401, 403, 429]);
 const TILE_ERROR_THRESHOLD = 5;
 
@@ -128,7 +129,10 @@ function attachStyleFallback(targetMap) {
 
     targetMap.on("style.load", () => {
         styleLoadedOnce = true;
-        if (usingFallback) hideMaritimeBorders(targetMap);
+        if (usingFallback) {
+            setFallbackWaterColour(targetMap);
+            hideMaritimeBorders(targetMap);
+        }
     });
 
     targetMap.on("sourcedata", (event) => {
@@ -157,6 +161,14 @@ function attachStyleFallback(targetMap) {
             }
         }
     });
+}
+
+function setFallbackWaterColour(targetMap) {
+    for (const layer of targetMap.getStyle().layers) {
+        if (layer.type === "fill" && layer["source-layer"] === "water") {
+            targetMap.setPaintProperty(layer.id, "fill-color", OSM_SEA_LEVEL_COLOUR);
+        }
+    }
 }
 
 function hideMaritimeBorders(targetMap) {

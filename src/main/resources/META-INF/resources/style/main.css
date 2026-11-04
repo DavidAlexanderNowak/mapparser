@@ -1,11 +1,18 @@
 @import "component/mobile.css";
+
+@import "component/dialogue.css";
 @import "component/viewport.css";
 @import "component/text-box.css";
 @import "component/help-overlay.css";
+
 @import "layout/viewport.css";
 @import "layout/text-box-left.css";
 @import "layout/text-box-right.css";
+@import "layout/popup-dialogue-centred.css";
+
 @import "elements.css";
+@import "variables.css";
+
 @import "thirdparty/maplibre.css";
 
 /* ----------- *
@@ -22,17 +29,19 @@ body {
     height: 100%;
     margin: 0;
 
-    font-family: OpenTTD;
-    font-size: min(1vw, calc( (90vh * 37 / 1500) ));
-    line-height: min(1vw, calc( (90vh * 37 / 1500) ));
+    font-family: var(--global-font-family);
+    font-size: var(--unit-font-size);
+    line-height: var(--unit-font-size);
+
+    user-select: none;
 
     overflow: hidden;
 }
 
 a {
-    color: black;
+    color: var(--font-colour-text);
     text-decoration: none;
-    font-family: OpenTTD;
+    font-family: var(--global-font-family);
 }
 /* ----------- *
  * Page layout *

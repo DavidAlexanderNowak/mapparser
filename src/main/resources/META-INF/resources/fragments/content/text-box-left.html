@@ -1,0 +1,43 @@
+<section>
+    <h2>Tool controls</h2>
+
+    <section>
+        <h3>Sea level mode</h3>
+
+        <p>Sets the elevation that will be zero in the heightmap, everything below is cut off.</p>
+        <dl>
+            <dt>Absolute</dt>
+            <dd>Enter the meters directly</dd>
+            <dt>Relative</dt>
+            <dd>Enter the percentile which shall be used as the cutoff elevation. Useful for maps around lakes
+            </dd>
+            <dt>Auto</dt>
+            <dd>The tool will calculate the cutoff elevation on its own</dd>
+        </dl>
+    </section>
+
+    <section>
+        <h3>Town granularity levels</h3>
+
+        <p>Depending on zoom level, the finer granularities are unavailable.</p>
+        <dl>
+            <dt>Off</dt>
+            <dd>Only a heightmap.png file will be generated</dd>
+            <dt>1</dt>
+            <dd>Only large cities will be counted</dd>
+            <dt>2</dt>
+            <dd>Level 1 plus large towns</dd>
+            <dt>3</dt>
+            <dd>Level 2 plus villages and suburbs</dd>
+        </dl>
+    </section>
+</section>
+
+<section>
+    <h2>Usage in OpenTTD</h2>
+
+    <p>The heightmap can be loaded on its own, via "Play Heightmap".</p>
+    <p>In the scenario editor, the heightmap can be loaded (save icon menu), alongside the towns.json file,
+        under the towns menu -> "Generate towns" -> "Load from file".</p>
+    <p>Generating random industries recommended.</p>
+</section>

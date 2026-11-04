@@ -17,7 +17,7 @@ public class RestServiceBean {
     public ByteArrayOutputStream generateOutput(Request request) throws IOException, SQLException {
         ByteArrayOutputStream heightMapStream = generateHeightMap(request.centre(), request.rotationDegrees(),
                 request.coordinateWidth(), request.maxCoordinateWidth(), request.seaLevel(),
-                request.seaLevelRelativeMode());
+                request.seaLevelRelativeMode(), request.preview());
 
         if (!request.includeTownData()) {
             return heightMapStream;
@@ -30,12 +30,12 @@ public class RestServiceBean {
 
     private ByteArrayOutputStream generateHeightMap(Position<Double> centre, int rotationDegrees,
                                                     double coordinateWidth, double maxCoordinateWidth, double seaLevel,
-                                                    boolean seaLevelRelativeMode) throws NoSuchElementException,
+                                                    boolean seaLevelRelativeMode, boolean preview) throws NoSuchElementException,
             ImagingOpException, IOException {
         int zoom = CoordinateCalculator.calculateZoomToUse(maxCoordinateWidth);
         double cutoutPercentage = CoordinateCalculator.calculateCutoutPercentage(coordinateWidth, zoom);
         return HeightMapGenerator.generateHeightMap(centre, zoom, rotationDegrees, cutoutPercentage, seaLevel,
-                seaLevelRelativeMode);
+                seaLevelRelativeMode, preview);
     }
 
     private ByteArrayOutputStream generateTownArray(Position<Double> centre, int rotationDegrees,

@@ -1,0 +1,48 @@
+<div class="component-viewport-content-selector">
+    <div></div>
+</div>
+<div class="component-viewport-content-control">
+    <div>
+        <div>
+            <button id="viewport-button-seaLevelMode"
+                    class="element-wide-large-button"
+                    title="Switch between absolute and relative sea level modes">
+                Absolute
+            </button>
+        </div>
+        <div class="element-viewport-seaLevel-input-container">
+            <input id="viewport-input-seaLevel" type="number"
+                   data-help-text="Enter sea level for normalization. In absolute mode, meters. In relative mode, percentile from 0-100">
+        </div>
+        <div>
+            <button id="viewport-button-seaLevelAuto" class="element-middle-large-button"
+                    title="Let the sea level cutoff point be calculated automatically">Auto
+            </button>
+        </div>
+    </div>
+    <div>
+        <div>
+            <button id="viewport-button-zoomIn" class="element-square-large-button" title="Zoom in by small step">
+                <img src="/images/zoom-in.png"/>
+            </button>
+            <button id="viewport-button-zoomOut" class="element-square-large-button" title="Zoom out by small step">
+                <img src="/images/zoom-out.png"/>
+            </button>
+            <button id="viewport-button-trueBearing" class="element-square-large-button" title="True the bearing">
+                <img src="/images/compass.png"/>
+            </button>
+        </div>
+        <div>
+            <button id="viewport-button-generate" title="Generate preview"
+                    data-help-text="Generate the heightmap allowing a download afterwards">
+                Generate map
+            </button>
+        </div>
+        <div>
+            <button id="viewport-button-toggleTowns" class="element-middle-large-button" title="Towns generation off"
+                    data-help-text="Switch between town granularity levels (0: off 1: only cities 2: adds towns 3: adds villages and suburbs)">
+                <img src="/images/towns.png"/><span id="viewport-town-granularity"></span>
+            </button>
+        </div>
+    </div>
+</div>

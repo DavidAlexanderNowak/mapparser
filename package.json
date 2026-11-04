@@ -1,7 +1,7 @@
 {
   "name": "town-map-parser-frontend",
   "private": true,
-  "version": "0.16.1alpha",
+  "version": "0.17alpha",
   "description": "Frontend dependencies for the OpenTTD town map parser",
   "scripts": {
     "copy-assets": "node build/copy-assets.js"

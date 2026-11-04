@@ -1,0 +1,47 @@
+:root {
+    /* Colours */
+    --background-colour: #838583;
+    --accent-colour-dark: #626562;
+    --accent-colour-light: #a8a8a8;
+
+    /* Font */
+    --global-font-family: OpenTTD;
+    --font-colour-text: black;
+    --font-colour-header: white;
+    --text-shadow-header: calc(0.08 * var(--unit-font-size)) calc(0.08 * var(--unit-height)) 0 black;
+    --font-colour-warning: #a00000;
+
+    /* Base units for responsive sizing */
+    --unit-height-base: 1vh;
+    --unit-height-relative: 9;
+    --unit-height: min( var(--unit-height-base), calc( var(--unit-width-base) / var(--unit-ratio) ) );
+
+    --unit-width-base: 1vw;
+    --unit-width-relative: 19;
+    --unit-width: min( var(--unit-width-base), calc( var(--unit-height-base) * var(--unit-ratio) ) );
+
+    --unit-ratio: calc(var(--unit-width-relative) / var(--unit-height-relative));
+
+    /* Derived from reference units */
+    --unit-font-size: calc(2 * var(--unit-height));
+    --unit-border-thickness: calc(0.25 * var(--unit-height));
+
+    /* Dialogue components */
+    --header-height: calc(3.25 * var(--unit-height));
+    --footer-height: calc(2.5 * var(--unit-height));
+
+    /* Borders */
+    --border-light: var(--unit-border-thickness) solid var(--accent-colour-light);
+    --border-dark: var(--unit-border-thickness) solid var(--accent-colour-dark);
+    --border-background: var(--unit-border-thickness) solid var(--background-colour);
+
+    --thin-border-thickness: calc(0.25 * var(--unit-border-thickness));
+    --thin-border-light: var(--thin-border-thickness) solid var(--accent-colour-light);
+    --thin-border-dark: var(--thin-border-thickness) solid var(--accent-colour-dark);
+
+    /* Z-Indexes */
+    --z-index-map-dimmer: 500;
+    --z-index-ui: 1000;
+    --z-index-help-overlay: 2000;
+    --z-index-popup: 3000;
+}

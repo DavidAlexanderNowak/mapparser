@@ -1,47 +1,180 @@
-/* ------ *
- * Layout *
- * ------ */
-.component-viewport {
-    position: fixed;
-    top: calc(50vh - min(calc(25vw / (937 / 1217) * 0.5), calc((90vh * 1217 / 1500) * 0.5)));
-    left: calc(50vw - calc( min(25vw, calc((90vh * 1217 / 1500) * (937 / 1217))) * 0.5 ));
-    width: min(25vw, calc((90vh * 1217 / 1500) * (937 / 1217)));
-    aspect-ratio: 937 / 1217;
-    transform: translateY(calc(100% * 35 / 1217));
-    z-index: 1000;
-
-    pointer-events: none;
+/* --------- *
+ * Variables *
+ * --------- */
+:root {
+    --viewport-control-buttons-height: calc(5 * var(--unit-height));
 }
 
-.component-viewport img {
+/* ---------- *
+ * Components *
+ * ---------- */
+.component-viewport-content-selector {
+    aspect-ratio: 1;
+
+    border-left: var(--border-light);
+    border-top: var(--border-light);
+    border-right: var(--border-dark);
+    border-bottom: var(--border-dark);
+}
+
+.component-viewport-content-selector > div {
+    aspect-ratio: 1;
+
+    border-left: var(--border-background);
+    border-top: var(--border-background);
+    border-right: var(--border-background);
+    border-bottom: var(--border-background);
+}
+
+.component-viewport-content-selector > div > img {
     display: block;
+    width:100%;
     height: 100%;
-    width: 100%;
-    z-index: 1000;
+}
+.component-viewport-content-control {
+    pointer-events: auto;
+}
+
+.component-viewport-content-control > div {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: auto 1fr auto;
+
+    height: var(--viewport-control-buttons-height);
+}
+
+.component-viewport-content-control > div > div {
+    display: grid;
+    grid-auto-flow: column;
+
+    background: var(--accent-colour-dark);
 }
 
 /* -------- *
  * Elements *
  * -------- */
-.component-viewport label.warning {
-    color: #a00000 !important;
-}
-.component-viewport .element-processing-indicator {
-    left: calc(100% * 420 / 937) !important;
-    width: calc(100% * 431 / 937) !important;
-    text-align: left;
+.component-dialogue-header div > label.warning {
+    color: var(--font-colour-warning);
 }
 
-.component-viewport .element-button-toggleTowns span {
+.component-viewport-content-control > div > div > button {
+    position: relative;
+
+    background: var(--background-colour);
+
+    height: var(--viewport-control-buttons-height);
+
+    font-family: OpenTTD;
+    font-size: calc(1.1 * var(--unit-font-size));
+
+    border-left: var(--border-light);
+    border-top: var(--border-light);
+    border-right: var(--border-dark);
+    border-bottom: var(--border-dark);
+}
+
+.component-viewport-content-control > div > div > button:disabled {
+    color: var(--accent-colour-dark);
+}
+
+.component-viewport-content-control > div > div > button.is-toggled {
+    background: var(--accent-colour-light);
+}
+
+.component-viewport-content-control > div > div > button.element-square-large-button {
+    aspect-ratio: 1;
+}
+
+.component-viewport-content-control > div > div > button.element-square-large-button > img {
+    width: 100%;
+}
+
+.component-viewport-content-control > div > div > button.element-middle-large-button {
+    aspect-ratio: 1.5;
+}
+
+.component-viewport-content-control > div > div > button.element-middle-large-button > img {
+    height: 100%;
+}
+
+.component-viewport-content-control > div > div > button.element-middle-large-button > span {
     position: absolute;
     right: 5%;
-    bottom: 3%;
+    bottom: -7.5%;
 
     color: white;
-    text-shadow: 0.05vw 0.05vw 0 black;
+    text-shadow: var(--text-shadow-header);
 }
 
-.component-viewport .element-town-granularity-disabled {
+.component-viewport-content-control > div > div > button.element-middle-large-button > span.element-town-granularity-disabled {
     color: red !important;
-    font-size: min(1.25vw, calc( 1.25 * (90vh * 37 / 1500) ));
+    font-size: calc(1.25 * var(--unit-font-size));
+}
+
+.component-viewport-content-control > div > div > button.element-wide-large-button {
+    aspect-ratio: 3;
+}
+
+#viewport-button-generate {
+    grid-template-columns: max-content 0;
+    column-gap: 0;
+}
+
+.component-viewport-content-control > div > div > button > label.element-processing-label {
+    color: var(--accent-colour-dark) !important;
+}
+
+.component-viewport-content-control > div > div > button :first-child.element-processing-label {
+    grid-area: 1 / 2;
+}
+
+.component-viewport-content-control > div > div > button :first-child.element-processing-label {
+    grid-area: 1 / 1;
+    white-space: nowrap;
+    overflow: visible;
+}
+
+.component-viewport-content-control > div > div.element-viewport-seaLevel-input-container {
+    border-right: var(--border-dark);
+    border-bottom: var(--border-dark);
+}
+
+.component-viewport-content-control > div > div > input[type="number"] {
+    appearance: none;
+    -moz-appearance: textfield;
+
+    box-sizing: border-box;
+    width: 100%;
+    padding: calc(0.25 * var(--unit-height)) 0 0 calc(0.5 * var(--unit-width));
+
+    font-family: OpenTTD;
+    font-size: calc(1.1 * var(--unit-font-size));
+    line-height: calc(1.1 * var(--unit-font-size));
+
+    border-left: var(--border-light);
+    border-top: var(--border-light);
+    border-right: var(--border-background);
+    border-bottom: var(--border-background);
+
+    background: none;
+
+    pointer-events: auto;
+}
+
+.component-viewport-content-control > div > div > input[type="number"]:focus {
+    outline: none;
+}
+
+.component-viewport-content-control > div > div > input[type="number"]:disabled {
+    color: var(--accent-colour-light);
+}
+
+.component-viewport-content-contro > div > div > input[type="number"]::-webkit-inner-spin-button  {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.component-viewport-content-control > div > div > input[type="number"]::-webkit-outer-spin-button  {
+    -webkit-appearance: none;
+    margin: 0;
 }
